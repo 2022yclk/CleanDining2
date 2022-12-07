@@ -9,7 +9,8 @@ function CreateNewParty() {
 
     const [title, setTitle] = useState("");
     const [partyDate, setPartyDate] = useState("");
-    const [partyTime, setPartyTime] = useState("");
+    const [hour, setHour] = useState(null);
+    const [min, setMin] = useState(null);
     const [number, setNumber] = useState(null);
     const [briefInfo, setBriefInfo] = useState("");
     const [content, setContent] = useState("");
@@ -22,6 +23,7 @@ function CreateNewParty() {
         event.preventDefault();
         const title1 = title; // title
         const partyDate1 = partyDate; // date
+        const partyTime1 = hour;
         const number1 = number; // gather_num
         const briefInfo1 = briefInfo;
         const content1 = content;
@@ -33,6 +35,7 @@ function CreateNewParty() {
             'license': license,
             'title': title1,
             'date': partyDate1,
+            'time': partyTime1,
             'briefInfo': briefInfo1,
             'gather_num': number1,
             'content': content1,
@@ -67,10 +70,13 @@ function CreateNewParty() {
         }
     };
 
-    const handleTime = (event) => {
-        setPartyTime(event.target.value);
+    const handleHour = (event) => {
+        setHour(event.target.value);
     }
 
+    const handleMin = (event) => {
+        setMin(event.target.value);
+    }
 
     const handleNumber = (event) => {
         setNumber(event.target.value);
@@ -91,7 +97,7 @@ function CreateNewParty() {
     const handleDueDate = (event) => {
         const data2 = new Date(event.target.value);
         const data3 = new Date(partyDate);
-        if(data2<data1 || data2>data3){
+        if(data2<data1 || data2>=data3){
             alert('마감기한을 다시 선택해주세요!');
             setDueDate("");
         } else{
@@ -116,14 +122,33 @@ function CreateNewParty() {
                     <div className="p-datediv">
                         <label>Date / Time</label>
                         <input className="p-date" type="date" value={partyDate} onChange={handleDate}/>
-                        <input className="p-time" type="time" value={partyTime} onChange={handleTime}/>
+                        <select value={hour} onChange={handleHour}>
+                            <option value="">Hour</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select value={min} onChange={handleMin}>
+                            <option value="">Min</option>
+                            <option value="00">00</option>
+                            <option value="30">30</option>
+                        </select>
                     </div>
 
                     <div>
                         <label for="number">인원</label>
                         <select id="number" value={number} onChange={handleNumber}>
                             <option value="">Choose ?</option>
-                            <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>

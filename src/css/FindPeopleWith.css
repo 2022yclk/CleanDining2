@@ -3,7 +3,7 @@
 .watch{position:relative;left: 90px;top:30px;height:50px;width:200px;}
 .createBtn{position:relative;left:40px;top:30px;width:200px;height:50px;}
 .bottom{display: grid;position:relative;top:50px;left:65px;}
-.id{font-size:50px;margin-bottom:20px;}
+.id{font-size:50px;margin:20px 0 20px 20px;}
 .party{font-size:20px;}
 .list{margin-top:15px;}
 .list ul{list-style: none;}

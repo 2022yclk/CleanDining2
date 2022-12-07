@@ -28,17 +28,20 @@ app.post("/addParty", (req,res)=> {
 	const license = req.body.license;
 	const title = req.body.title;
     const partydate = req.body.date;
+	const partyTime = req.body.time;
 	const brief = req.body.briefInfo;
     const number = req.body.gather_num;
 	const content = req.body.content;
 	const due = req.body.duedate;
     
+	console.log(partyTime);
     //console.log(partydate, number, license);
-    connection.query("INSERT INTO findPeople(license_id, title, date, briefInfo, gather_num, content, dueDate) values (?,?,?,?,?,?,?)", 
-	[license, title, partydate, brief, number, content, due], function(err,rows){
+    connection.query("INSERT INTO findPeople(license_id, title, date, time, briefInfo, gather_num, content, dueDate) values (?,?,?,?,?,?,?,?)", 
+	[license, title, partydate, partyTime, brief, number, content, due], function(err,rows){
         if(err) throw err;
         else{
             console.log("insert");
+			
             //res.send("success");
         }
     });
