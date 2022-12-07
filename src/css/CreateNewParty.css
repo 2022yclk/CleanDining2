@@ -1,18 +1,26 @@
-form {display:grid;position: relative;left:50px;}
 label {
     float: left;
-    width: 200px;
-    padding-right: 24px;
+    width: 100px;
 }
  
-input, select, textarea buttonclass {
+input, select, textarea, button {
     float: left;
     width: calc(100% - 100px);
     margin-bottom:10px;
 }
 
-.cre-bottom{position:relative;left:0px;}
+.cre-bottom{position:relative;margin-left:60px;display:grid;}
 
-.top{
-    margin-bottom:10px;
-}
+
+.top{margin-bottom:10px;}
+
+.p-datediv{display:flex; width:500px;}
+.p-date, .p-time, .p-due{width:150px;float:left;margin-bottom:10px;}
+
+.p-title{width:300px;}
+.p-brinfo{width:300px;}
+
+#number{width:150px;}
+
+.p-btn{position:relative;left:100px;top:30px;width:200px;height:50px;}
+.cre-bottom div{margin-top: 20px;}

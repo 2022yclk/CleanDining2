@@ -9,7 +9,7 @@ function WatchDetailInfo(){
 
     const [data, setData] = useState([]);
     
-    const handleReview = (id, key, event) => {
+    const handleReview = (event) => {
         event.preventDefault();
         window.location.href = `http://localhost:3000/writeReview/${id}/${key}`;
     }

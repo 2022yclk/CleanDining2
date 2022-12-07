@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import '../css/WriteReview.css'
 
 function WriteReview() {
 
@@ -34,7 +35,10 @@ function WriteReview() {
         } else if(content===""){
             alert('설명을 입력해주세요!');
         } else{
-            axios.post(requestURL, reviewInfo).catch(
+            axios.post(requestURL, reviewInfo).then(
+                alert('소중한 리뷰가 정상적으로 등록되었습니다!'),
+                window.history.back()
+            ).catch(
                 error => {
                     return alert(error);
                 });
@@ -75,26 +79,34 @@ function WriteReview() {
                     </div>
                 </div>
             </div>
-            <form>
-                <label for="title" className="first-time">Review Title</label>
-                <input id="title" type="text" placeholder="Enter Title..." name="title" onChange={handleTitle}/>
+            <div className="cre-bottom">
+                <div>
+                    <label for="title" className="first-time">Review Title</label>
+                    <input id="title" className="w-title" type="text" placeholder="Enter Title..." name="title" onChange={handleTitle}/>
+                </div>
 
-                <label>방문한 날짜</label>
-                <input type="date" name="partyDate" onChange={handleVisit}/>
+                <div>
+                    <label>방문한 날짜</label>
+                    <input className="w-date" type="date" name="partyDate" onChange={handleVisit}/>
+                </div>
 
-                <label>내가 매기는 위생등급</label>
-                <select value={grade} onChange={handleGrade}>
-                    <option value="">Select Grade</option>
-                    <option value="매우우수">매우 우수</option>
-                    <option value="우수">우수</option>
-                    <option value="나쁨">나쁨</option>
-                </select>
+                <div>
+                    <label>내가 매기는 위생등급</label>
+                    <select className="wm-grade" value={grade} onChange={handleGrade}>
+                        <option value="">Select Grade</option>
+                        <option value="매우우수">매우 우수</option>
+                        <option value="우수">우수</option>
+                        <option value="나쁨">나쁨</option>
+                    </select>
+                </div>
 
-                <label>내용</label>
-                <textarea name="content" rows="7" cols="30" onChange={handleContent}></textarea>
+                <div>
+                    <label>내용</label>
+                    <textarea className="w-title" name="content" rows="7" cols="30" onChange={handleContent}></textarea>
+                </div>
 
-                <button onClick={handleCreate}>리뷰 작성</button>
-            </form>
+                <button className="w-btn" onClick={handleCreate}>리뷰 작성</button>
+            </div>
         </div>
     );
 }
