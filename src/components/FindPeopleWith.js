@@ -22,7 +22,7 @@ function FindPeopleWith(){
 
     const handleClick = (data, event) => {
         event.preventDefault();
-        window.location.href = `http://localhost:3000/showParty/${data}`;
+        window.location.href = `http://localhost:3000/showParty/${key}/${data}`;
     }
     
     function getList(){

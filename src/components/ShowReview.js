@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 function ShowParty(){
 
-    const { key, postid } = useParams();
+    const { key, reviewid } = useParams();
 
     const [data, setData] = useState([]);
 
@@ -12,8 +12,8 @@ function ShowParty(){
         //console.log(key);
         axios({
             method: 'get',
-            url: 'http://52.79.70.2:3000/getPartyDataDetail',
-            params: {'key': postid}
+            url: 'http://52.79.70.2:3000/getReviewDataDetail',
+            params: {'key': reviewid}
         }).then(res=>setData(res.data));
     }
 
@@ -29,7 +29,7 @@ function ShowParty(){
                 <div>
                     <div>{item.title}</div>
                     <div>{item.date}</div>
-                    <div>{item.gather_num}</div>
+                    <div>{item.grade}</div>
                     <div>{item.content}</div>
                 </div>
             ))}
