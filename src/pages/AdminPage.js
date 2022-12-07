@@ -17,10 +17,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
-//import React, { Component } from "react";
-//import { Card, Button } from "tabler-react";
-//import Header from "../components/adminComponents/Header"
-import Reportboard from "../components/adminComponents/Reportboard.js";
 import CollapsibleTable from "../components/adminComponents/Table.js";
 
 function Copyright(props) {
@@ -118,6 +114,7 @@ function AdminPage() {
               color="inherit"
               noWrap
               sx={{ flexGrow: 1 }}
+              fontFamily={"Nanum"}
             >
               관리자 리뷰 신고 목록 대시보드
             </Typography>
@@ -170,12 +167,8 @@ function AdminPage() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} lg={12}>
-                <Paper sx={{p: 2,display: 'flex',flexDirection: 'column',height: 600,}}>
+                <Paper sx={{p: 2,display: 'flex',flexDirection: 'column',}}>
                     <CollapsibleTable></CollapsibleTable>
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                 </Paper>
               </Grid>
             </Grid>

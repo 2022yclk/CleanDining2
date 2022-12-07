@@ -1,3 +1,10 @@
+.adminFirstTable {
+    padding-bottom: 0;
+    padding-top: 0;
+    background-color: "#ccc";
+}
+
+/*
 .header {
     display: flex;
     padding: 10px 0px;
@@ -18,7 +25,7 @@
 }
 
 .toHome {
-    font-family: NanumSquareB, sans-serif;
+    font-family: "Nanum", sans-serif;
     font-weight: bold;
     font-size: 30px;
     text-decoration: none;
@@ -33,7 +40,7 @@
 .box {
     margin: 10px 60px;
     display: flex;
-    /* border: 1px solid pink; */
+    border: 1px solid pink;
 }
 
 .content {
@@ -153,3 +160,4 @@ tr:last-child {
 td {
     padding: 20px 0 20px 0;
 }
+*/

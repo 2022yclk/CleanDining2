@@ -13,23 +13,17 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
-
-{/* <TableCell align="left">ID&nbsp; (100g serving)</TableCell>
-<TableCell align="left">Writer&nbsp;</TableCell>
-<TableCell align="left">Restaurant&nbsp;(g)</TableCell>
-<TableCell align="right">Date&nbsp;(YYYY-MM-DD)</TableCell>
-<TableCell align="right">Processed&nbsp;(0/1)</TableCell>
-const rows = [
-    createData(1,'홍길동','필동함박','2022-12-01', '허위사실유포', 0), */}
-
-function createData(id, writer, restaurant, date, processed) {
+function createData(report_id, review_id, restaurant, date, processed) {
   return {
-    id, writer, restaurant, date, processed: [
+    report_id, review_id, restaurant, date, processed, review: [
       {
         date: '2020-01-05',
-        contents: '허위사실유포!',
-        amount: 3,
+        writer_id: 'asdf@gmail.com',
+        contents: '맛이 없어요',
+        report_cnt: 2,
       },
     ],
   };
@@ -51,23 +45,51 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.writer}
-        </TableCell>
-        <TableCell align="right">{row.id}</TableCell>
-        <TableCell align="right">{row.writer}</TableCell>
-        <TableCell align="right">{row.restaurant}</TableCell>
-        <TableCell align="right">{row.date}</TableCell>
+        <TableCell component="th" scope="row">{row.report_id}</TableCell>
+        <TableCell align="left">{row.review_id}</TableCell>
+        <TableCell align="left">{row.restaurant}</TableCell>
+        <TableCell align="center">{row.date}</TableCell>
+        <TableCell align="right">{row.processed}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: "#ccc" }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                Report Detail
-              </Typography>
-              {row.contents}
+            <Box sx={{margin: 1, padding:0.1, backgroundColor: "#FFFFFF"}}>
+              <Box sx={{ marginTop: 1, marginLeft:2, marginRight:2, display:'flex', justifyContent: "space-between" }}>
+                <Typography variant="h6" gutterBottom component="div" fontFamily={"Nanum"}>
+                  Reported Review Detail
+                </Typography>
+                <Stack direction="row" spacing={2}>
+                  <Button variant="contained" color="success" size="small">신고 수락</Button>
+                  <Button variant="outlined" color="error" size="small">신고 철회</Button>
+                </Stack>
+              </Box>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date</TableCell>
+                    <TableCell align="left">Writer ID</TableCell>
+                    <TableCell>Contents</TableCell>
+                    <TableCell align="right">Accumulate of Report</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {row.review.map((reviewRow) => (
+                    <TableRow key={reviewRow.date}>
+                      <TableCell component="th" scope="row">
+                        {reviewRow.date}
+                      </TableCell>
+                      <TableCell align="left">{reviewRow.writer_id}</TableCell>
+                      <TableCell>{reviewRow.contents}</TableCell>
+                      <TableCell align="right">
+                        누적 {reviewRow.report_cnt}번
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </Box>
+            
           </Collapse>
         </TableCell>
       </TableRow>
@@ -77,20 +99,27 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    writer: PropTypes.string.isRequired,
-    restaurant: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    contents: PropTypes.string.isRequired,
-    processed: PropTypes.bool.isRequired,
+    report_id: PropTypes.number.isRequired, 
+    review_id: PropTypes.number.isRequired, 
+    restaurant: PropTypes.string.isRequired, 
+    date: PropTypes.string.isRequired, 
+    processed: PropTypes.bool.isRequired, 
+    review: PropTypes.arrayOf(
+      PropTypes.shape({
+        date: PropTypes.string.isRequired, 
+        writer_id: PropTypes.string.isRequired, 
+        contents: PropTypes.string.isRequired, 
+        report_cnt: PropTypes.number.isRequired, 
+      })
+    ).isRequired,
   }).isRequired,
 };
 
 const rows = [
-  createData(1,'홍길동','필동함박','2022-12-01', '허위사실유포', 0),
-  createData(1,'김대한','이삭토스트','2022-12-02', '허위사실유포', 0),
-  createData(1,'황민국','필동면옥','2022-12-03', '허위사실유포', 0),
-  createData(1,'양만세','내가찜한닭','2022-12-04', '허위사실유포', 0),
+  createData(1, 1,'필동함박','2022-12-01', 0),
+  createData(2, 3,'이삭토스트','2022-12-02', 0),
+  createData(3, 5,'필동면옥','2022-12-03', 0),
+  createData(4, 7,'내가찜한닭','2022-12-04', 0),
 ];
 
 export default function CollapsibleTable() {
@@ -100,7 +129,7 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell align="left">ID&nbsp; (100g serving)</TableCell>
+            <TableCell>ID&nbsp;</TableCell>
             <TableCell align="left">Writer&nbsp;</TableCell>
             <TableCell align="left">Restaurant&nbsp;(g)</TableCell>
             <TableCell align="right">Date&nbsp;(YYYY-MM-DD)</TableCell>
