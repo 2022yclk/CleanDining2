@@ -1,0 +1,155 @@
+.header {
+    display: flex;
+    padding: 10px 0px;
+}
+
+.toManager {
+    position: absolute;
+    right: 60px;
+    padding: 10px 0;
+    font-size: 12px;
+    color: black;
+    text-decoration: none;
+}
+
+.toManager:hover {
+    color: #BFBFBF;
+    cursor: pointer;
+}
+
+.toHome {
+    font-family: NanumSquareB, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    text-decoration: none;
+    color: black;
+}
+
+.toHome:hover {
+    color: #BFBFBF;
+    cursor: pointer;
+}
+
+.box {
+    margin: 10px 60px;
+    display: flex;
+    /* border: 1px solid pink; */
+}
+
+.content {
+    display: block;
+    width: 100%;
+    padding: 10px 50px;
+}
+
+.menu {
+    width: 200px;
+    height: 550px;
+    background-color: white;
+    border: 1px solid #D9D9D9;
+}
+
+.menuBtn {
+    margin: 15px;
+    width: 170px;
+    height: 50px;
+    background-color: transparent;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 50px;
+    font-family: NanumSquareR, sans-serif;
+    font-size: 16px;
+}
+
+.menuBtn:hover {
+    background-color: #5b9ad524;
+    color: black;
+}
+
+.menuLink {
+    background-color: transparent;
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.menuLink:hover {
+    font-family: NanumSquareB, sans-serif;
+    color: black;
+    cursor: pointer;
+}
+
+.on {
+    background-color: #5B9BD5;
+    color: white;
+}
+
+.menuGroup {
+    margin: 15px;
+    width: 170px;
+    height: 40px;
+    background-color: transparent;
+    color: #5B9BD5;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-family: NanumSquareB, sans-serif;
+    font-size: 16px;
+}
+
+.guide {
+    margin-bottom: 15px;
+    font-family: NanumSquareB, sans-serif;
+    font-size: 20px;
+    color: #5B9BD5;
+}
+
+.title {
+    margin: 20px 0;
+    font-family: NanumSquareB, sans-serif;
+    font-size: 16px;
+    color: black;
+}
+
+.subtitle {
+    min-width: 120px;
+    font-family: NanumSquareR, sans-serif;
+    font-size: 14px;
+    color: black;
+}
+
+.subcontent {
+    margin: 10px 0;
+}
+
+.subcheck {
+    margin: 20px 0;
+}
+
+.contentcheck {
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th {
+    border-bottom: 1px solid #D9D9D9;
+    padding: 30px 0 30px 0;
+    color: #5B9BD5;
+}
+
+tr {
+    border-bottom: 1px solid #D9D9D9;
+}
+
+tr:last-child {
+    border-bottom: none;
+}
+
+td {
+    padding: 20px 0 20px 0;
+}

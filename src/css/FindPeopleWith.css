@@ -1,0 +1,13 @@
+.logo{position:relative;top:30px;left:100px;width: 200px; height:50px;line-height:50px;background-color: aliceblue;}
+.top{position:relative;top:20px;display: flex;}
+.watch{position:relative;left: 90px;top:30px;height:50px;width:200px;}
+.createBtn{position:relative;left:40px;top:30px;width:200px;height:50px;}
+.bottom{display: grid;position:relative;top:50px;left:65px;}
+.id{font-size:50px;margin-bottom:20px;}
+.party{font-size:20px;}
+.list ul{list-style: none;}
+.partylist{height:100px;width:300px;border:1px solid black;border-radius:10px;margin-bottom: 30px;}
+.grade{display:flex;}
+.gradeTitle{ margin-right:15px;}
+.gradegrade{color:red;}
+.center{display:flex;}

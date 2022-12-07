@@ -1,0 +1,18 @@
+form {display:grid;position: relative;left:50px;}
+label {
+    float: left;
+    width: 200px;
+    padding-right: 24px;
+}
+ 
+input, select, textarea buttonclass {
+    float: left;
+    width: calc(100% - 100px);
+    margin-bottom:10px;
+}
+
+.cre-bottom{position:relative;left:0px;}
+
+.top{
+    margin-bottom:10px;
+}
