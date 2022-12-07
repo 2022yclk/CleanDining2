@@ -13,10 +13,54 @@ import Container from '@mui/material/Container'
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import axios from 'axios';
 
 const theme = createTheme();
 
 function AdminLogin() {
+
+  const [adminID, setAdminID] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const login = async(e) => {
+    console.log(adminID);
+    console.log(password);
+    e.preventDefault();
+    const adminIDInput = adminID;
+    const passwordInput = password;
+    const requestURL = 'http://52.79.70.2:3000/adminloginVerify';
+    const userInfo = {
+      'adminID': adminIDInput,
+      'password': passwordInput
+    };
+    if(adminIDInput.length === 0) {
+      return alert("관리자 이메일을 입력해주세요!");
+    }
+    else if(passwordInput.length === 0) {
+      return alert("비밀번호를 입력해주세요!");
+    }
+    else {
+      axios.post(requestURL, userInfo)
+      .catch(error => {
+        alert(error);
+        return window.location.reload()
+      })
+      .then(response => {
+        console.log(response);
+        switch (response.data) {
+          case "ERROR1":
+            alert("Clean Dining에 오신것을 환영합니다");
+            return window.location.replace("/Main"); //추후 수정요함
+          case "ERROR2":
+            return alert("비밀번호를 다시 확인해주세요");
+          case "ERROR3":
+            return alert("아이디를 다시 확인해주세요");
+          default :
+            return alert("ERROR");
+        }
+      })
+    }
+  }
 
     function handleClick(e) {
         window.location.href="/Signup"
@@ -80,11 +124,14 @@ function AdminLogin() {
          </Typography>
        </Box>
       <TextField 
-      label="Email Address" 
+      label="Admin ID" 
       required 
       fullWidth 
-      name="email"
-      autoComplete="email"
+      name="adminID"
+      autoComplete="adminID"
+      onChange={(e) => {
+        setAdminID(e.target.value);
+      }}
       autoFocus
       />
       <TextField 
@@ -94,13 +141,16 @@ function AdminLogin() {
       fullWidth 
       name="password"
       autoComplete="current-password"
+      onChange={(e) => {
+        setPassword(e.target.value);
+      }}
       sx={{ mt:3 }}
       />
       <FormControlLabel 
       control={<Checkbox value="remember" color="primary" />}
       label="Remember me"
       />
-      <Button type="submit" variant="contained" fullWidth sx={{ mt:3 }} onClick = {signinClick}>로그로그인</Button>
+      <Button type="submit" variant="contained" fullWidth sx={{ mt:3 }} onClick = {login}>로그로그인</Button>
       <Grid container>
         <Grid item sx={{ mt:1 }} xs><Link>비밀번호는 잃어버리면 큰일나요 눌러도 아무 기능 없는 링크임</Link></Grid>
       </Grid>

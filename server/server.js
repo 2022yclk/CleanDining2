@@ -235,6 +235,40 @@ app.post("/loginVerify", (req, res) =>{
 	     })
 });
 
+app.post("/adminloginVerify", (req, res) =>{
+    console.log("Start Admin Login Verify");
+    var connection = mysql.createConnection({
+                host : "localhost",
+                user : "serverDBManager", //mysql의 id
+                password : "0000", //mysql의 password
+                database : "dining", //사용할 데이터베이스
+                port : 3306
+            });
+    connection.connect();
+    const adminID = req.body.adminID;
+    const password = req.body.password;
+    console.log("adminID:");
+    console.log(adminID);
+    console.log("password");
+    console.log(password);
+        connection.query("SELECT admin_id, password FROM admin WHERE admin_id = ?", [adminID], function(err, rows){
+        if(err) throw err;
+        else if(rows.length){
+            console.log("Get Rows");
+            if(rows[0].password == password){
+                res.send("ERROR1");
+            }
+            else {                
+                    res.send("ERROR2");
+            }
+        }
+        else{
+            res.send("ERROR3");
+        }
+        connection.end();
+     })
+});
+
 app.get("/ping", (req, res) => {
 	  res.send("pong");
 	console.log("/ping CALLED");
