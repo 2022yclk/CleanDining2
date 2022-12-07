@@ -67,15 +67,25 @@ function WatchDetailInfo(){
             <div className="watch-bottom">
                 최근 리뷰
             </div>
-            <div className="review-list">
-                <ul>
-                    {data.map((item)=>(
-                        <div className="reviewUlItem">
-                            <div className="reviewlist" onClick={(event) => handleClick(item.review_id, event)}>{item.title}{item.alertCnt}</div>
-                            <button className="reviewAlertBtn" onClick={(event) => handleAlert(item.review_id, event)}>해당 리뷰 신고</button>
+            <div className="bottom">
+                        <div className="list">
+                            {data.map((item)=>(
+                                <div className="partylist">
+                                    <div className="wd-top">
+                                        <div>{item.writer_id}admin34(Test Value)</div>
+                                        <button className="wd-btn" onClick={(event)=>handleClick(item.review_id, event)}>추천</button>
+                                        <button className="wd-btn" onClick={(event) => handleAlert(item.review_id, event)}>신고</button>
+                                    </div>
+                                    <div className="wd-mid">
+                                        <div className="wd-midtitle">{item.title}</div>
+                                        <div className="wd-midcon">{item.content}</div>
+                                    </div>
+                                    <div className="wd-btm">
+                                        <div className="wd-btm-date">{item.date.slice(0,10)} 방문</div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </ul>
             </div>
         </div>
     );

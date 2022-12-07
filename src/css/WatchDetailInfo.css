@@ -6,4 +6,14 @@
 .showad{position:relative;left:30px;}
 .w-grade{display:flex;position:relative;left:300px;top:-20px;}
 .reviewUlItem{display:grid;position:relative;width:950px;}
-.reviewAlertBtn{width:100px;height:30px;position:relative;left:250px;margin-bottom:10px;}
+
+.wd-top{height:30px;display:flex;background: #b4d4c9;border-radius:10px 10px 0 0;}
+.wd-top button{position:relative;left:90px;top:5px;width:50px;height:20px;border:none;border-radius:5px;background: #D1F6DF;margin-right:5px;}
+.wd-top button:hover{background: #D1E4F6;}
+.wd-top div{margin:5px 0 0 20px; font-size:13px;}
+.wd-mid{height:70px;background: #d3ebea;display: grid;}
+.wd-midtitle{font-size:17px;font-weight:bold;margin:10px 0 0 20px;}
+.wd-midcon{font-size:15px;margin-left:40px;}
+.wd-btm{height:50px;display:flex;}
+.wd-btm-date{margin: 7px 0 0 30px; font-size:13px;}
+.wd-btm-num{position:relative;left:195px;top:7px;font-size:13px;}

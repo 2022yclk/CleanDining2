@@ -61,7 +61,19 @@ function FindPeopleWith(){
                 <div className="party">파티 리스트</div>
                 <div className="list">
                     {data.map((item)=>(
-                        <div className="partylist" onClick={(event)=>handleClick(item.post_id, event)}>{item.title}</div>
+                        <div className="partylist">
+                            <div className="pi-top">
+                                <div>{item.writer_id}admin34(Test Value)</div>
+                                <button onClick={(event)=>handleClick(item.post_id, event)}>파티 확인</button>
+                            </div>
+                            <div className="pi-mid">
+                                {item.title}
+                            </div>
+                            <div className="pi-btm">
+                                <div className="pi-btm-date">{item.date.slice(0,10)}</div>
+                                <div className="pi-btm-num">{item.gathered}&nbsp;/&nbsp;{item.gather_num}</div>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
