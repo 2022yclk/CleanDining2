@@ -55,7 +55,7 @@ function FindPeopleWith(){
             </div>
             <div className="center">
                 <button className="createBtn" onClick={(event) => handleCreate(id, key, event)}>새로운 파티 만들기</button>
-                <button className="watch" onClick={(event) => handleShow(id, addr, grade, key, event)}>음식점 세부정보 보기</button>
+                <button className="watchBtn" onClick={(event) => handleShow(id, addr, grade, key, event)}>음식점 세부정보 보기</button>
             </div>
             <div className="bottom">
                 <div className="party">파티 리스트</div>
