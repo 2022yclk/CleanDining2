@@ -34,7 +34,7 @@ function AdminLogin() {
       'password': passwordInput
     };
     if(adminIDInput.length === 0) {
-      return alert("관리자 이메일을 입력해주세요!");
+      return alert("관리자ID를 입력해주세요!");
     }
     else if(passwordInput.length === 0) {
       return alert("비밀번호를 입력해주세요!");
