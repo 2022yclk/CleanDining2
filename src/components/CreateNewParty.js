@@ -9,6 +9,7 @@ function CreateNewParty() {
 
     const [title, setTitle] = useState("");
     const [partyDate, setPartyDate] = useState("");
+    const [partyTime, setPartyTime] = useState("");
     const [number, setNumber] = useState(null);
     const [briefInfo, setBriefInfo] = useState("");
     const [content, setContent] = useState("");
@@ -45,7 +46,10 @@ function CreateNewParty() {
         } else if(content===""){
             alert('설명을 입력해주세요!');
         } else{
-            axios.post(requestURL, partyInfo).catch(
+            axios.post(requestURL, partyInfo).then(
+                alert('새로운 파티가 등록되었습니다!'),
+                window.history.back()
+            ).catch(
                 error => {
                     return alert(error);
                 });
@@ -62,6 +66,11 @@ function CreateNewParty() {
             setPartyDate(event.target.value);
         }
     };
+
+    const handleTime = (event) => {
+        setPartyTime(event.target.value);
+    }
+
 
     const handleNumber = (event) => {
         setNumber(event.target.value);
@@ -99,31 +108,44 @@ function CreateNewParty() {
                 </div>
             </div>
             <div className="cre-bottom">
-                    <label for="title" className="first-time">Title</label>
-                    <input id="title" type="text" placeholder="Enter Title..." value={title} onChange={handleTitle} required/>
+                    <div>
+                        <label for="title">Title</label>
+                        <input id="title" className="p-title" type="text" placeholder="Enter Title..." value={title} onChange={handleTitle}/>
+                    </div>
 
-                    <label>Date</label>
-                    <input type="date" value={partyDate} onChange={handleDate}/>
+                    <div className="p-datediv">
+                        <label>Date / Time</label>
+                        <input className="p-date" type="date" value={partyDate} onChange={handleDate}/>
+                        <input className="p-time" type="time" value={partyTime} onChange={handleTime}/>
+                    </div>
 
-                    <label for="number">인원</label>
-                    <select id="number" value={number} onChange={handleNumber}>
-                        <option value="">Choose ?</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                    <div>
+                        <label for="number">인원</label>
+                        <select id="number" value={number} onChange={handleNumber}>
+                            <option value="">Choose ?</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
 
-                    <label>간략한 설명</label>
-                    <input value={briefInfo} placeholder="간략한 설명..." onChange={handleInfo} required/>
+                    <div>
+                        <label>간략한 설명</label>
+                        <input className="p-brinfo" value={briefInfo} placeholder="간략한 설명..." onChange={handleInfo}/>
+                    </div>
 
-                    <label>내용</label>
-                    <textarea value={content} rows="7" cols="30" onChange={handleContent} required></textarea>
+                    <div>
+                        <label>내용</label>
+                        <textarea className="p-title" value={content} rows="7" cols="30" onChange={handleContent} required></textarea>
+                    </div>
 
-                    <label>DeadLine</label>
-                    <input type="date" value={dueDate} onChange={handleDueDate} />
+                    <div>
+                        <label>DeadLine</label>
+                        <input className="p-due" type="date" value={dueDate} onChange={handleDueDate} />
+                    </div>
 
-                    <button class="buttonclass" onClick={handleCreate}>파티 생성</button>
+                    <button className="p-btn" onClick={handleCreate}>파티 생성</button>
                 
             </div>
         </div>
