@@ -14,7 +14,7 @@ import WatchDetailInfo from './components/WatchDetailInfo.js';
 import WriteReview from './components/WriteReview.js';
 import CreateNewParty from './components/CreateNewParty.js'
 import Form from './pages/Form.js'
-import Admin from './pages/Admin';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
        <Route path="/writeReview/:id/:key" element={<WriteReview />}></Route>
        <Route path="/createNewParty/:id/:key" element={<CreateNewParty/>}></Route>
        <Route path="/form" element={<Form/>}></Route>
-       <Route path="/admin" element={<Admin/>} />
+       <Route path="/admin" element={<AdminPage/>} />
       </Routes>
     </Router>
   )
