@@ -1,8 +1,9 @@
 h4{margin: 20px 0 0 20px;}
 .partyTitle{display: flex;margin-bottom:35px;}
 .partyPeople{display:flex;margin: 0 20px 35px 0;}
+.partyPeople label{width:130px;font-size:17px;font-weight:bold;}
 .partyFind{margin:40px 0 0 60px;}
-.ppul {margin:0 30px 0 70px;}
-.partyTitle label, .partyPeople label{width:130px;font-size:17px;font-weight:bold;}
-.sp-btn{height:40px;font-size:20px;border:none;}
-.sp-btn:hover{background-color: ghostwhite;}
+.ppul {margin:0 30px 0 30px;}
+.partyTitle label{width:130px;font-size:17px;font-weight:bold;}
+.sp-btn{height:40px;font-size:20px;border:none;float:left;width:400px;margin-bottom:10px;}
+.sp-btn:hover{background-color: beige;}

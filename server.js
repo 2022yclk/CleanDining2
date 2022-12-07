@@ -93,6 +93,24 @@ app.post("/addAlert", (req, res) => {
 	});
 })
 
+app.post("/participateParty", (req, res) => {
+	var connection = mysql.createConnection({
+		host: "localhost",
+		user: "serverDBManager",
+		password: "0000",
+		databse: "dining",
+		port: 3306
+	});
+	connection.connect();
+	const postid = req.body.postid;
+	connection.query("UPDATE dining.findPeople SET gathered = gathered + 1 WHERE post_id = ?", [postid], function(err,rows){
+		if(err) throw err;
+		else{
+			console.log("participate success");
+		}
+	});
+})
+
 app.get("/getPartyData", (req,res)=>{
 	var connection = mysql.createConnection({
 		host : "localhost",

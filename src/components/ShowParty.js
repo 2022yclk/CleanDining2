@@ -17,7 +17,7 @@ function ShowParty(){
         }).then(res=>setData(res.data));
     }
 
-    console.log(data.gathered);
+    //console.log(data.gathered);
 
     const hanldeParticipate = (event) => {
         event.preventDefault();
@@ -26,7 +26,7 @@ function ShowParty(){
             'postid': postid,
         }
         
-        if(data.gather_num<=data.gathered){
+        if(data.gather_num===data.gathered){
             alert('이미 모집인원이 다 찼습니다!');
         } else{
             axios.post(requestURL, participateInfo).then(
@@ -64,19 +64,16 @@ function ShowParty(){
                             <label>Due Date </label>
                             {item.dueDate}
                         </div>
-                        <div className="partyPeople">
-                            <div>
-                                <label>모집 인원</label>
-                                {item.gather_num}
-                            </div>
-                            <div>
-                                <label className="ppul">현재 모집된 인원</label>
-                                {item.gathered}
-                            </div>
-                        </div>
                         <div className="partyTitle">
                             <label>내용</label>
                             {item.content}
+                        </div>
+                        <div className="partyPeople">
+                            <label>모집 인원</label>
+                            {item.gather_num}
+                           
+                            <label className="ppul">현재 모집된 인원</label>
+                            {item.gathered}
                         </div>
                         <button className="sp-btn" onClick={hanldeParticipate}>파티 참가하기</button>
                     </div>
