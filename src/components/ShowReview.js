@@ -10,7 +10,6 @@ function ShowParty(){
     const [data, setData] = useState([]);
 
     function getList(){
-        //console.log(key);
         axios({
             method: 'get',
             url: 'http://52.79.70.2:3000/getReviewDataDetail',
@@ -20,8 +19,6 @@ function ShowParty(){
 
     const handleAlert = (review_id, event) => {
         event.preventDefault();
-        // 리뷰 아이디를 넘겨서 디비 테이블 값 변경
-        // UPDATE review SET alertCnt = alertCnt + 1 WHERE review_id = ?
 
         const requestURL = 'http://52.79.70.2:3000/addAlert';
         const alertInfo = {

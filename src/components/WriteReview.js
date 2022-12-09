@@ -5,7 +5,6 @@ import '../css/WriteReview.css'
 
 function WriteReview() {
 
-    // key = DB에 review 저장할 때의 PK
     const {id, key} = useParams();
 
     const [title, setTitle] = useState("");

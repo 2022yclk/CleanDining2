@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import '../css/FindPeopleWith.css';
 import axios from 'axios';
-//import { BrowserRouter, Routes,Route } from 'react-router-dom';
 
 function FindPeopleWith(){
     
@@ -26,7 +25,6 @@ function FindPeopleWith(){
     }
     
     function getList(){
-        //console.log(key);
         axios({
             method: 'get',
             url: 'http://52.79.70.2:3000/getPartyData',
