@@ -41,7 +41,6 @@ const FindGpsResult = ({data}) => {
         };
 
         const map = new kakao.maps.Map(container, options);
-        //const ps = new kakao.maps.services.Places();
 
         // 우측 상단에 map control 추가
         var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -77,34 +76,6 @@ const FindGpsResult = ({data}) => {
             var keyplace = data[k].props.place;
             var keyvalue = data[k].key;
             var keygrade = data[k].props.value;
-
-            /*ps.keywordSearch(data[k].props.place, placesSearchCB);
-
-            // data = kakao map serach data
-            function placesSearchCB(data, status, pagination){
-                if(status === kakao.maps.services.Status.OK){
-
-                    // 카카오 맵으로 변환한 장소 이름
-                    // FindPeopleWith에서 장소명 쉽게 변환하기 위해
-                    // 카카오 맵 내부에서 해당 장소 key를 keyvalue로 저장
-                    keyplace = data[0].place_name; 
-                    keyvalue = data[0].id;
-                    
-                    //console.log(keyplace);
-                    //setKakaoName(data[0].place_name);
-                    
-                } else if(status === kakao.maps.services.status.ERROR){
-
-                    alert('오류 발생');
-                    return;
-        
-                } else if(status === kakao.maps.services.status.ZERO_RESULT){
-        
-                    alert('검색결과가 존재하지 않습니다');
-                    return;
-    
-                } 
-            }*/
 
             var callback = function(result, status){
                 if(status === kakao.maps.services.Status.OK){
@@ -167,7 +138,6 @@ const FindGpsResult = ({data}) => {
 
     }, [latitude, longtitude]);
 
-    //<div class="main1">{data.map((item) => (item.props.address))}</div>
     return(
         <div>
             <div id="Map" class="Map"></div>

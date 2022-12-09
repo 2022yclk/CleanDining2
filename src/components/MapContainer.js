@@ -46,8 +46,6 @@ function MapContainer({apiData, searchPlace}) {
             if(status === kakao.maps.services.Status.OK){
                 let bounds = new kakao.maps.LatLngBounds();
 
-                //console.log(data);
-
                 for(let i=0; i<data.length; i++){
                     for(var j=0; j<apiData.length; j++){
 
@@ -79,25 +77,20 @@ function MapContainer({apiData, searchPlace}) {
                             }
 
                             if((count/temp1.length) > 0.5){
-                                //console.log(data[i]);
                                 displayMarker(data[i], apiData[j].props.value, apiData[j].key);
                                 bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x)); // 위도, 경도 재설정
                                 openPlace.push(data[i]);
                                 setMatch(false);
-                                //console.log(match);
                             }
                         }
                     }
-                    //console.log(match);
+                    
                     if(match) bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
                 }
 
                 let result = [...new Set(openPlace)];
 
-                //console.log(result);
-
                 map.setBounds(bounds);
-                //displayPagination(pagination);
                 setPlaces(result);
 
             } else if(status === kakao.maps.services.status.ERROR){
