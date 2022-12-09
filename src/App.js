@@ -23,10 +23,11 @@ function App() {
       <Routes>
        <Route path="/" element={<Login/>} />
        <Route path="/Signup" element={<Signup/>} />
-       <Route path="/Main" element={<Main/>} />
+       <Route path="/Main/" element={<Main/>} />
        <Route path="/AdminLogin" element={<AdminLogin/>} />
-       <Route path="/NearestRest" element={<NearestRest/>} />
-       <Route path="/SearchRest" element={<SearchRest/>} />
+       <Route path="/AdminPage" element={<AdminPage/>} />
+       <Route path="/NearestRest/" element={<NearestRest/>} />
+       <Route path="/SearchRest/" element={<SearchRest/>} />
        <Route path="/parentLocation" element={<FindGps />}></Route>
        <Route path="/FindPeopleWith/:id/:addr/:grade/:key" element={<FindPeopleWith />}></Route>
        <Route path="/watchDetailInfo/:id/:addr/:grade/:key" element={<WatchDetailInfo />}></Route>

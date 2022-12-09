@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import '../css/FindPeopleWith.css';
 import axios from 'axios';
-//import { BrowserRouter, Routes,Route } from 'react-router-dom';
 
 function FindPeopleWith(){
     
@@ -26,7 +25,6 @@ function FindPeopleWith(){
     }
     
     function getList(){
-        //console.log(key);
         axios({
             method: 'get',
             url: 'http://52.79.70.2:3000/getPartyData',
@@ -71,6 +69,7 @@ function FindPeopleWith(){
                             </div>
                             <div className="pi-btm">
                                 <div className="pi-btm-date">{item.date.slice(0,10)}</div>
+                                <div className="pi-btm-txt">현재 인원&nbsp;/&nbsp;정원</div>
                                 <div className="pi-btm-num">{item.gathered}&nbsp;/&nbsp;{item.gather_num}</div>
                             </div>
                         </div>

@@ -19,19 +19,19 @@ function ShowParty(){
 
     //console.log(data.gathered);
 
-    const hanldeParticipate = (event) => {
+    const hanldeParticipate = (num, gather, event) => {
         event.preventDefault();
         const requestURL = "http://52.79.70.2:3000/participateParty";
         const participateInfo = {
             'postid': postid,
         }
         
-        if(data.gather_num===data.gathered){
+        if(num==gather){
             alert('이미 모집인원이 다 찼습니다!');
         } else{
             axios.post(requestURL, participateInfo).then(
                 alert('모임 참가 신청이 완료되었습니다. 주선자가 참가 신청을 수락하면 문자로 알림이 가게 됩니다!'),
-                window.location.reload()
+                window.history.back()
             ).catch(
                 error=>{
                     return alert(error);
@@ -75,7 +75,7 @@ function ShowParty(){
                             <label className="ppul">현재 모집된 인원</label>
                             {item.gathered}
                         </div>
-                        <button className="sp-btn" onClick={hanldeParticipate}>파티 참가하기</button>
+                        <button className="sp-btn" onClick={(event) => hanldeParticipate(item.gathered, item.gather_num, event)}>파티 참가하기</button>
                     </div>
                 </div>
             ))}

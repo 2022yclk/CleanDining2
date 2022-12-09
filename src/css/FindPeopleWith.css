@@ -19,4 +19,5 @@
 .pi-mid{height:70px;text-align: center;line-height:70px;background: #d3ebea;font-weight:bold;font-size:18px;}
 .pi-btm{height:30px;display:flex}
 .pi-btm-date{margin: 7px 0 0  30px; font-size:13px;}
-.pi-btm-num{position:relative;left:195px;top:7px;font-size:13px;}
+.pi-btm-txt{position:relative;left:100px;top:7px;font-size:13px;}
+.pi-btm-num{position:relative;left:120px;top:7px;font-size:13px;}

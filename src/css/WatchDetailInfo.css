@@ -12,8 +12,9 @@
 .wd-top button:hover{background: #D1E4F6;}
 .wd-top div{margin:5px 0 0 20px; font-size:13px;}
 .wd-mid{height:70px;background: #d3ebea;display: grid;}
-.wd-midtitle{font-size:17px;font-weight:bold;margin:10px 0 0 20px;}
+.wd-midtitle{display:flex;font-size:17px;font-weight:bold;margin:10px 0 0 20px;}
+.wd-midtitle-1{width:260px;}
+.wd-midtitle-2{font-size:14px;font-weight:normal;}
 .wd-midcon{font-size:15px;margin-left:40px;}
-.wd-btm{height:50px;display:flex;}
-.wd-btm-date{margin: 7px 0 0 30px; font-size:13px;}
-.wd-btm-num{position:relative;left:195px;top:7px;font-size:13px;}
+.wd-btm{height:30px;display:flex;}
+.wd-btm-date{margin: 7px 0 0 230px; font-size:13px;}

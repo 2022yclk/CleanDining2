@@ -93,6 +93,26 @@ app.post("/addAlert", (req, res) => {
 	});
 })
 
+app.post("/addRecommend", (req, res) => {
+	var connection = mysql.createConnection({
+		host: "localhost",
+		user: "serverDBManager",
+		password: "0000",
+		databse: "dining",
+		port: 3306
+	});
+	connection.connect();
+	const review_id = req.body.review_id;
+
+	connection.query("UPDATE dining.review SET recomCnt = recomCnt + 1 WHERE review_id = ?", [review_id], function(err,rows){
+		if(err) throw err;
+		else{
+			console.log("recommend success");
+		}
+	});
+})
+
+
 app.post("/participateParty", (req, res) => {
 	var connection = mysql.createConnection({
 		host: "localhost",
@@ -243,14 +263,14 @@ app.post("/loginVerify", (req, res) =>{
 		    else if(rows.length){
 			    console.log("Get Rows");
 			    if(rows[0].password == password){
-				    res.send("ERROR1");
+				    res.send("SUCCESS");
 			    }
 			    else {                
-			            res.send("ERROR2");
+			            res.send("ERROR1");
 			    }
 		    }
 		    else{
-			    res.send("ERROR3");
+			    res.send("ERROR2");
 		    }
 		    connection.end();
 	     })
@@ -277,14 +297,14 @@ app.post("/adminloginVerify", (req, res) =>{
         else if(rows.length){
             console.log("Get Rows");
             if(rows[0].password == password){
-                res.send("ERROR1");
+                res.send("SUCCESS");
             }
             else {                
-                    res.send("ERROR2");
+                    res.send("ERROR1");
             }
         }
         else{
-            res.send("ERROR3");
+            res.send("ERROR2");
         }
         connection.end();
      })
