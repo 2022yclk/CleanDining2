@@ -29,8 +29,8 @@ function App() {
        <Route path="/NearestRest" element={<NearestRest/>} />
        <Route path="/SearchRest" element={<SearchRest/>} />
        <Route path="/parentLocation" element={<FindGps />}></Route>
-       <Route path="/FindPeopleWith/:id/:addr/:grade/:key" element={<FindPeopleWith />}></Route>
-       <Route path="/watchDetailInfo/:id/:addr/:grade/:key" element={<WatchDetailInfo />}></Route>
+       <Route path="/findPeopleWith/:id/:key/:addr/:addr2/:grade/:phone/:cat" element={<FindPeopleWith />}></Route>
+       <Route path="/watchDetailInfo/:id/:key/:addr/:addr2/:grade/:phone/:cat" element={<WatchDetailInfo />}></Route>
        <Route path="/showParty/:key/:postid" element={<ShowParty />}></Route>
        <Route path="/writeReview/:id/:key" element={<WriteReview />}></Route>
        <Route path="/showReview/:key/:reviewid" element={<ShowReview />}></Route>

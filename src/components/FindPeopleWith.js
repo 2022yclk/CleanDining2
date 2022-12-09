@@ -6,12 +6,12 @@ import axios from 'axios';
 function FindPeopleWith(){
     
     // 음식점 id value
-    const { id, addr, grade, key } = useParams();
+    const { id, addr, grade, key, addr2, phone, cat } = useParams();
     const [data, setData] = useState([]);
 
-    const handleShow = (data, addr, grade, key, event) => {
+    const handleShow = (id, key, addr, addr2, grade, phone, cat, event) => {
         event.preventDefault();
-        window.location.href = `http://localhost:3000/watchDetailInfo/${data}/${addr}/${grade}/${key}`;
+        window.location.href = `http://localhost:3000/watchDetailInfo/${id}/${key}/${addr}/${addr2}/${grade}/${phone}/${cat}`;
     }
 
     const handleCreate = (data, key, event) => {
@@ -53,7 +53,7 @@ function FindPeopleWith(){
             </div>
             <div className="center">
                 <button className="createBtn" onClick={(event) => handleCreate(id, key, event)}>새로운 파티 만들기</button>
-                <button className="watchBtn" onClick={(event) => handleShow(id, addr, grade, key, event)}>음식점 세부정보 보기</button>
+                <button className="watchBtn" onClick={(event) => handleShow(id, key, addr, addr2, grade, phone, cat, event)}>음식점 세부정보 및 리뷰보기</button>
             </div>
             <div className="bottom">
                 <div className="party">파티 리스트</div>

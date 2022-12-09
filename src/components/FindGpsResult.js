@@ -17,7 +17,7 @@ const FindGpsResult = ({data}) => {
                 lon = position.coords.longitude; // 경도
     
                 var locPosition = new kakao.maps.LatLng(lat,lon),
-                    message = `<span style="display: block;background: #50627F;color: #fff;text-align: center;width:130px;height: 24px;line-height:22px;border-radius:4px;padding:0px 10px;">현재 위치</span>`;
+                    message = `<span style="display: block;background: #50627F;color: #fff;text-align: center;width:150px;height: 24px;line-height:22px;border-radius:4px;padding:0px 10px;">현재 위치</span>`;
     
                 setLatitude(lat);
                 setLongtitude(lon);
@@ -80,7 +80,7 @@ const FindGpsResult = ({data}) => {
             var callback = function(result, status){
                 if(status === kakao.maps.services.Status.OK){
 
-                    // 좌표(위도, 경도), 장소이름(openapi), 장소 ID(openapi key), 도로명 주소(openapi), 지번 주소(openapi), 위생등급
+                    // 좌표(위도, 경도), 장소이름(openapi), 장소 ID(openapi key), 도로명 주소(openapi), 상세 주소(openapi), 위생등급
                     displayMarker(result[0].y, result[0].x, keyplace, keyvalue, result[0].address.address_name, result[0].road_address.address_name, keygrade);
                 }
             }
@@ -109,9 +109,6 @@ const FindGpsResult = ({data}) => {
                                     <div style="float:right;margin:5px 10px 0 0;font-size:12px;font-color:red;">위생등급:  ${place_grade}</div>
                                    </div>
                                    <div class="body" style="position: relative;overflow: hidden;">
-                                       <div class="img" style="position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;">
-                                           <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70" />
-                                       </div>
                                        <div class="desc" style="position: relative;margin: 13px 0 0 90px;height: 75px;">
                                             <div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소)${place_road}</div>
                                             <div class="jibun" style="font-size: 11px;color: #888;margin-top: -2px;">지번)${place_ad}</div>
