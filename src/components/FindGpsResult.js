@@ -193,19 +193,17 @@ const FindGpsResult = ({data1, data2}) => {
             //console.log(place);
             let content = `<div class="wrap" style="position: absolute;left: 0;bottom: 40px;width: 288px;height: 150px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;">
                                <div class="info" style="width: 286px;height: 140px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
-                                    <div class="title" style="height: 50px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
-                                        <div style="margin:10px 0 0 15px;">${place.place_name}</div>
-                                    </div>
-                                    <div class="body" style="position: relative;overflow: hidden;">
-                                        <div class="desc" style="position: relative;margin: 10px;height: 100px;">
-                                            <div class="ellipsis" style="font-size:13px;width:170px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소)${place.address_name}</div>
-                                            <button type="button" onClick="window.location.href = 'http://localhost:3000/findPeopleWith/${place.place_name}/${openapi.WRKR_REG_NO}/${place.address_name}/${openapi.ADDR}/${openapi.HG_ASGN_LV}/${place.phone}/${place.category_name}'" style="margin:15px 0px 0px 5px;height:25px;width:150px;">같이 먹을사람 찾기</button>
-                                        </div>
-                                        <div style="float:right;margin:15px 10px 00 ;font-size:12px;font-color:red;text-align:center">
-                                            위생등급 <br /> 
-                                            <h2 style="color:red;">${openapi.HG_ASGN_LV}</h2>
-                                        </div>
-                                    </div>
+                                   <div class="title" style="padding: 5px 0 0 10px;height: 50px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
+                                   <div>${place}</div>
+                                    <div style="float:right;margin:5px 10px 0 0;font-size:12px;font-color:red;">위생등급:  ${place_grade}</div>
+                                   </div>
+                                   <div class="body" style="position: relative;overflow: hidden;">
+                                       <div class="desc" style="position: relative;margin: 13px 0 0 90px;height: 75px;">
+                                            <div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소)${place_road}</div>
+                                            <div class="jibun" style="font-size: 11px;color: #888;margin-top: -2px;">지번)${place_ad}</div>
+                                            <button type="button" onClick="window.location.href = 'http://localhost:3000/findPeopleWith/${place}/${place_road}/${place_grade}/${place_key}'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">같이 먹을사람 찾기</button>
+                                       </div>
+                                   </div>
                                </div>
                             </div>`;
 
