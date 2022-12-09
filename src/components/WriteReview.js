@@ -96,7 +96,7 @@ function WriteReview() {
                         <option value="">Select Grade</option>
                         <option value="매우우수">매우 우수</option>
                         <option value="우수">우수</option>
-                        <option value="나쁨">나쁨</option>
+                        <option value="좋음">좋음</option>
                     </select>
                 </div>
 
