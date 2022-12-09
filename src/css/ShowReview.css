@@ -1,0 +1,7 @@
+h4{margin: 20px 0 0 20px;}
+.showReview{margin:40px 0 0 60px;}
+.reviewTitle{display: flex;margin-bottom:35px;}
+.reviewTitle label{width:200px;font-size:17px;font-weight:bold;float: right;}
+.reviewBtm{margin-left:60px;}
+.sr-btn{height:40px;font-size:20px;border:none;float:left;width:200px;margin:0 20px 10px 0;}
+.sr-btn:hover{background-color: beige;}
