@@ -40,7 +40,6 @@ function FindPeopleWith(){
 
     return(
         <div>
-            <div className="logo"><img alt="logo" src="./assets/logo.png"/></div>
             <div className="top">
                 <div>
                     <div className="id">{id}</div> 

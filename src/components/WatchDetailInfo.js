@@ -47,6 +47,11 @@ function WatchDetailInfo(){
         );
     }
 
+    const handleSanitary = (event) => {
+        event.preventDefault();
+        window.open("https://www.foodsafetykorea.go.kr/minwon/complain/complainIntro.do");
+    }
+
     function getList(){
         axios({
             method: 'get',
@@ -78,7 +83,7 @@ function WatchDetailInfo(){
             <div className="wdt-mid">
                 <div>Tel)&nbsp;{phone}</div>
             </div>
-            <button className="review-btn">위생 신고</button>
+            <button className="review-btn" onClick={(event) => handleSanitary(event)}>위생 신고</button>
             <button className="review-btn" onClick={(event) => handleReview(event)}>리뷰 쓰기</button>
             <div className="watch-bottom">
                 최근 리뷰
