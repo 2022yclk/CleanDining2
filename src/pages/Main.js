@@ -22,6 +22,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
+import { useParams } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -72,17 +73,20 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function Main() {
+  
+  //const {email} = useParams();
+
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   function toMap(e) {
-    window.location.href="/NearestRest"
+    window.location.href=`/NearestRest`
   }
 
   function toStringsearch(e) {
-    window.location.href="/SearchRest"
+    window.location.href=`/SearchRest`
   }
 
   function toAdminLogin(e) {
