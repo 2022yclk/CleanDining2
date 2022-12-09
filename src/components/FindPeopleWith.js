@@ -71,6 +71,7 @@ function FindPeopleWith(){
                             </div>
                             <div className="pi-btm">
                                 <div className="pi-btm-date">{item.date.slice(0,10)}</div>
+                                <div className="pi-btm-txt">현재 인원&nbsp;/&nbsp;정원</div>
                                 <div className="pi-btm-num">{item.gathered}&nbsp;/&nbsp;{item.gather_num}</div>
                             </div>
                         </div>

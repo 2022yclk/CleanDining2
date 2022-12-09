@@ -14,6 +14,5 @@
 .wd-mid{height:70px;background: #d3ebea;display: grid;}
 .wd-midtitle{font-size:17px;font-weight:bold;margin:10px 0 0 20px;}
 .wd-midcon{font-size:15px;margin-left:40px;}
-.wd-btm{height:50px;display:flex;}
-.wd-btm-date{margin: 7px 0 0 30px; font-size:13px;}
-.wd-btm-num{position:relative;left:195px;top:7px;font-size:13px;}
+.wd-btm{height:30px;display:flex;}
+.wd-btm-date{margin: 7px 0 0 230px; font-size:13px;}
