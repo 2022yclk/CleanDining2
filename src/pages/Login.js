@@ -48,12 +48,12 @@ function Login() {
       .then(response => {
         console.log(response);
         switch (response.data) {
-          case "ERROR1":
+          case "SUCCESS":
             alert("Clean Dining에 오신것을 환영합니다");
             return window.location.replace("/Main");
-          case "ERROR2":
+          case "ERROR1":
             return alert("비밀번호를 다시 확인해주세요");
-          case "ERROR3":
+          case "ERROR2":
             return alert("아이디를 다시 확인해주세요");
           default :
             return alert("ERROR");

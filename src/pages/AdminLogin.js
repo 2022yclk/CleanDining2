@@ -48,12 +48,12 @@ function AdminLogin() {
       .then(response => {
         console.log(response);
         switch (response.data) {
+          case "SUCCESS":
+            alert("관리자님 환영합니다");
+            return window.location.replace("/AdminPage"); //추후 수정요함
           case "ERROR1":
-            alert("Clean Dining에 오신것을 환영합니다");
-            return window.location.replace("/Main"); //추후 수정요함
-          case "ERROR2":
             return alert("비밀번호를 다시 확인해주세요");
-          case "ERROR3":
+          case "ERROR2":
             return alert("아이디를 다시 확인해주세요");
           default :
             return alert("ERROR");

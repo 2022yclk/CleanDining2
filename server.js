@@ -243,14 +243,14 @@ app.post("/loginVerify", (req, res) =>{
 		    else if(rows.length){
 			    console.log("Get Rows");
 			    if(rows[0].password == password){
-				    res.send("ERROR1");
+				    res.send("SUCCESS");
 			    }
 			    else {                
-			            res.send("ERROR2");
+			            res.send("ERROR1");
 			    }
 		    }
 		    else{
-			    res.send("ERROR3");
+			    res.send("ERROR2");
 		    }
 		    connection.end();
 	     })
@@ -277,14 +277,14 @@ app.post("/adminloginVerify", (req, res) =>{
         else if(rows.length){
             console.log("Get Rows");
             if(rows[0].password == password){
-                res.send("ERROR1");
+                res.send("SUCCESS", rows);
             }
             else {                
-                    res.send("ERROR2");
+                    res.send("ERROR1");
             }
         }
         else{
-            res.send("ERROR3");
+            res.send("ERROR2");
         }
         connection.end();
      })
