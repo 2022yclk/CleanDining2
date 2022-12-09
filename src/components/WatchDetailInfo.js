@@ -35,6 +35,20 @@ function WatchDetailInfo(){
         );
     }
 
+    const handleRecommend = (review_id, event) => {
+        event.preventDefault();
+
+        const requestURL = 'http://52.79.70.2:3000/addRecommend';
+        const recomInfo = {
+            'review_id': review_id,
+        }
+
+        axios.post(requestURL, recomInfo).then(
+            alert('해당 리뷰가 추천 되었습니다!'),
+            window.location.reload()
+        );
+    }
+
     function getList(){
         //console.log(key);
         axios({
@@ -73,11 +87,14 @@ function WatchDetailInfo(){
                                 <div className="partylist">
                                     <div className="wd-top">
                                         <div>{item.writer_id}admin34(Test Value)</div>
-                                        <button className="wd-btn" onClick={(event)=>handleClick(item.review_id, event)}>추천</button>
+                                        <button className="wd-btn" onClick={(event) => handleRecommend(item.review_id, event)}>추천</button>
                                         <button className="wd-btn" onClick={(event) => handleAlert(item.review_id, event)}>신고</button>
                                     </div>
-                                    <div className="wd-mid">
-                                        <div className="wd-midtitle">{item.title}</div>
+                                    <div className="wd-mid" onClick={(event)=>handleClick(item.review_id, event)}>
+                                        <div className="wd-midtitle">
+                                            <div className="wd-midtitle-1">{item.title}</div>
+                                            <div className="wd-midtitle-2">추천 수&nbsp;&nbsp;{item.recomCnt}</div>
+                                        </div>
                                         <div className="wd-midcon">{item.content}</div>
                                     </div>
                                     <div className="wd-btm">

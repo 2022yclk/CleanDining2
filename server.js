@@ -93,6 +93,26 @@ app.post("/addAlert", (req, res) => {
 	});
 })
 
+app.post("/addRecommend", (req, res) => {
+	var connection = mysql.createConnection({
+		host: "localhost",
+		user: "serverDBManager",
+		password: "0000",
+		databse: "dining",
+		port: 3306
+	});
+	connection.connect();
+	const review_id = req.body.review_id;
+
+	connection.query("UPDATE dining.review SET recomCnt = recomCnt + 1 WHERE review_id = ?", [review_id], function(err,rows){
+		if(err) throw err;
+		else{
+			console.log("recommend success");
+		}
+	});
+})
+
+
 app.post("/participateParty", (req, res) => {
 	var connection = mysql.createConnection({
 		host: "localhost",
