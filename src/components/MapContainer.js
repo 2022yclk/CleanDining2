@@ -47,6 +47,7 @@ function MapContainer({apiData, searchPlace}) {
                 let bounds = new kakao.maps.LatLngBounds();
 
                 for(let i=0; i<data.length; i++){
+                    console.log(data[i]);
                     for(var j=0; j<apiData.length; j++){
 
                         // openapi data에서 도로명 주소 가져와서 자르기
@@ -77,7 +78,7 @@ function MapContainer({apiData, searchPlace}) {
                             }
 
                             if((count/temp1.length) > 0.5){
-                                displayMarker(data[i], apiData[j].props.value, apiData[j].key);
+                                displayMarker(data[i], apiData[j].props.value, apiData[j].key, apiData[j].props.address, data[i].phone, data[i].category_name);
                                 bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x)); // 위도, 경도 재설정
                                 openPlace.push(data[i]);
                                 setMatch(false);
@@ -107,17 +108,17 @@ function MapContainer({apiData, searchPlace}) {
         }
 
         // 마커 생성
-        function displayMarker(place, grade, key){
+        function displayMarker(place, grade, key, detailAddr, phone, cat){
             let marker = new kakao.maps.Marker({
                 map: map,
                 position: new kakao.maps.LatLng(place.y, place.x)
             });
 
             // 커스텀 오버레이 생성
-            displayOverlay(marker, place, grade, key);
+            displayOverlay(marker, place, grade, key, detailAddr, phone, cat);
         }
 
-        function displayOverlay(marker, place, grade, key){
+        function displayOverlay(marker, place, grade, key, detailAddr, phone, cat){
 
             let overlay;
             var content = `<div class="wrap" style="position: absolute;left: 0;bottom: 40px;width: 288px;height: 150px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;">
@@ -130,7 +131,7 @@ function MapContainer({apiData, searchPlace}) {
                                        
                                        <div class="desc" style="position: relative;margin: 10px 10px 10px 10px;height: 100px;">
                                             <div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소)${place.road_address_name}</div>
-                                            <button type="button" onClick="window.location.href='http://localhost:3000/findPeopleWith/${place.place_name}/${place.road_address_name}/${grade}/${key}'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">같이 먹을사람 찾기</button>
+                                            <button type="button" onClick="window.location.href='http://localhost:3000/findPeopleWith/${place.place_name}/${key}/${place.road_address_name}/${detailAddr}/${grade}/${phone}/${cat}'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">같이 먹을사람 찾기</button>
                                        </div>
                                        <div style="float:right;margin:15px 10px 0 0;font-size:12px;font-color:red;text-align:center">위생등급 <br /> <h2>${grade}</h2> </div>
                                    </div>

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function WatchDetailInfo(){
 
-    const {id, addr, grade, key} = useParams();
+    const {id, addr, grade, key, addr2, phone, cat} = useParams();
 
     const [data, setData] = useState([]);
     
@@ -47,6 +47,11 @@ function WatchDetailInfo(){
         );
     }
 
+    const handleSanitary = (event) => {
+        event.preventDefault();
+        window.open("https://www.foodsafetykorea.go.kr/minwon/complain/complainIntro.do");
+    }
+
     function getList(){
         axios({
             method: 'get',
@@ -63,7 +68,7 @@ function WatchDetailInfo(){
 
     return(
         <div>
-            <div className="logo"><img alt="logo" src="./assets/logo.png"/></div>
+            <div className="wd-cate">{cat}</div>
             <div className="top">
                 <div>
                     <div className="id">{id}</div> 
@@ -74,11 +79,16 @@ function WatchDetailInfo(){
                     </div>
                 </div>
             </div>
+            <div className="top-wdt-mid">{addr2}</div>
+            <div className="wdt-mid">
+                <div>Tel)&nbsp;{phone}</div>
+            </div>
+            <button className="review-btn" onClick={(event) => handleSanitary(event)}>위생 신고</button>
             <button className="review-btn" onClick={(event) => handleReview(event)}>리뷰 쓰기</button>
             <div className="watch-bottom">
                 최근 리뷰
             </div>
-            <div className="bottom">
+            <div className="wd-bottom">
                         <div className="list">
                             {data.map((item)=>(
                                 <div className="partylist">
