@@ -6,13 +6,8 @@ const {kakao} = window;
 
 const FindGpsResult = ({data1, data2}) => {
 
-    //console.log(data2);
-
     const [latitude, setLatitude] = useState(null);
     const [longtitude, setLongtitude] = useState(null);
-    //const [place, setPlace] = useState("");
-    //const [key, setKey] = useState("");
-    //const [grade, setGrade] = useState("");
 
     useEffect(() => {
 
@@ -75,7 +70,6 @@ const FindGpsResult = ({data1, data2}) => {
 
         const ps = new kakao.maps.services.Places();
     
-        //var detailAddr = addr + ' 맛집';
         for(var k=0;k<data2.length;k++){
             
             console.log(data1);
@@ -106,12 +100,6 @@ const FindGpsResult = ({data1, data2}) => {
 
                     for(var j=0;j<data.length;j++){
 
-                        // 카카오맵에서 음식점 상세정보 페이지에서 보여줄 거
-                        //console.log(data[j].place_name);
-                        //console.log(data[j].address_name);
-                        //console.log(data[j].phone);
-                        //console.log(data[j].category_name);
-
                         var tmp = data[j].place_name;
                         var tmp1 = tmp.indexOf(' ');
                         var midTmp = tmp.slice(0,tmp1);
@@ -123,13 +111,8 @@ const FindGpsResult = ({data1, data2}) => {
                                 count = count + 1;
                             }
                         }
-
-                        //console.log(count);
-
                         
                         if((count/midTmp.length)>0.5){
-                            //console.log(data1.C004.row[k].WRKR_REG_NO);
-                            // place[x,y,place_name,address_name,phone,category_name] place key(open api), 
                             displayMarker(data[j], detailTmp);
                             
                         }
@@ -150,37 +133,11 @@ const FindGpsResult = ({data1, data2}) => {
             }
         }
 
-        // 주소-좌표 객체 생성
-        //var geocoder = new kakao.maps.services.Geocoder();
-
-        // data = open api search data
-        /*for(var k=0;k<data.length;k++){
-
-            console.log('-----1----');
-
-            var callback = function(result, status){
-                if(status === kakao.maps.services.Status.OK){
-                    //console.log(keyplace);
-                    // 좌표(위도, 경도), 장소이름(openapi), 장소 ID(openapi key), 도로명 주소(openapi), 상세 주소(openapi), 위생등급
-                    displayMarker(result[0].y, result[0].x, place, key, result[0].address.address_name, result[0].road_address.address_name, grade);
-                }
-            }
-
-            setPlace(data[k].props.place);
-            setKey(data[k].key);
-            setGrade(data[k].props.value);
-            
-            geocoder.addressSearch(data[k].props.address, callback);
-
-            console.log(place);
-        }*/
-
         function displayMarker(place, openapi){
             let marker = new kakao.maps.Marker({
                 map: map,
                 position: new kakao.maps.LatLng(place.y, place.x)
             });
-            //console.log(place);
             displayOverlay(marker, place, openapi);
         }
 
@@ -190,7 +147,6 @@ const FindGpsResult = ({data1, data2}) => {
             console.log(openapi);
 
             let overlay;
-            //console.log(place);
             let content = `<div class="wrap" style="position: absolute;left: 0;bottom: 40px;width: 288px;height: 150px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;">
                                <div class="info" style="width: 286px;height: 140px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
                                    <div class="title" style="padding: 5px 0 0 10px;height: 50px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">

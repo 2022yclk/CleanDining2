@@ -8,7 +8,6 @@ const {kakao} = window;
 
 const FindGps = () => {
 
-    //const [Places, setPlaces] = useState([]);
     const [addr, setAddr] = useState("");
     const [print, setPrint] = useState("");
     const [latitude, setLatitude] = useState(null);
@@ -53,54 +52,6 @@ const FindGps = () => {
     
         geocoder.coord2RegionCode(longtitude, latitude, callback);
     
-        /*
-        const ps = new kakao.maps.services.Places();
-    
-        //var detailAddr = addr + ' 맛집';
-        var detailAddr = '서울특별시 중구 퇴계로 197';
-    
-        ps.keywordSearch(detailAddr, placesSearchCB);
-    
-        function placesSearchCB(data, status, pagination){
-            if(status === kakao.maps.services.Status.OK){
-
-                console.log(data);
-                address_duplicate(data);
-                
-            } else if(status === kakao.maps.services.status.ERROR){
-    
-                alert('오류 발생');
-                return;
-    
-            } else if(status === kakao.maps.services.status.ZERO_RESULT){
-    
-                alert('검색결과가 존재하지 않습니다');
-                return;
-    
-            }
-        }*/
-        /*
-        function address_duplicate(data){
-    
-            var search_tmp = [];
-    
-            for(var i=0; i<data.length; i++){
-                var tmp = data[i].road_address_name;
-                var tmp1 = tmp.indexOf('로');
-                var tmp2 = tmp.indexOf(' ');
-                var tmp3 = tmp.slice(tmp2+1, tmp1+1);
-                search_tmp.push(tmp3);
-            }
-    
-            let search = [...new Set(search_tmp)];
-
-            setPlaces(search);
-        }
-        
-        if(addr!==""){
-            setLoading(false);
-        }*/
-
     }, [latitude, longtitude, addr, print]);
 
     return(

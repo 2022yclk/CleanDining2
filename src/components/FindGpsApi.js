@@ -2,17 +2,11 @@ import React, {useState} from 'react';
 import FindGpsResult from './FindGpsResult.js';
 import Loading from './Loading';
 import '../css/FindGps.css';
-//import FindGpsComp from './FindGpsComp.js';
-
-/*function DataMap() {
-
-}*/
 
 const FindGpsApi = ({addr, print}) => {
 
     const [dataMap, setDataMap] = useState([]);
     const [dataMap2, setDataMap2] = useState([]);
-    //const [searchPlace, setSearchPlaces] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const handleClick = (event) => {
@@ -24,13 +18,11 @@ const FindGpsApi = ({addr, print}) => {
         setLoading(true);
         try {
 
-            //var gps = uri.replace(/ /gi, "_");
             var current_uri = encodeURI(`http://openapi.foodsafetykorea.go.kr/api/ef03c3ddff5742b7bf91/C004/json/1/500/ADDR=${uri}`);
             
             console.log(current_uri);
             const response = await fetch(current_uri);
             const result = await response.json();
-            //console.log(result.C004.total_count);
 
             cutad(result);
 
