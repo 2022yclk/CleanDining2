@@ -297,7 +297,7 @@ app.post("/adminloginVerify", (req, res) =>{
         else if(rows.length){
             console.log("Get Rows");
             if(rows[0].password == password){
-                res.send("SUCCESS", rows);
+                res.send("SUCCESS");
             }
             else {                
                     res.send("ERROR1");
