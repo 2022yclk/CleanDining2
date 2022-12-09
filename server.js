@@ -13,7 +13,7 @@ const mysql = require("mysql");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.post("/addParty", (req,res)=> {
     var connection = mysql.createConnection({
@@ -309,3 +309,87 @@ app.get("/*", (req, res) => {
 http.createServer(app).listen(port, () => {
 	  console.log(`app listening at ${port}`);
 });
+
+// =============================================
+// ADMIN
+// =============================================
+app.get("/getReportedData", (req,res)=>{
+	var connection = mysql.createConnection({
+		host : "localhost",
+		user : "serverDBManager", //mysql의 id
+		password : "0000", //mysql의 password
+		database : "dining", //사용할 데이터베이스
+		port : 3306
+	});
+	connection.connect();
+	const value = req.query.key;
+	console.log(value);
+	connection.query("SELECT * FROM report WHERE report_id = ?", [value], function(err,data){
+		if(err) throw err;
+		else{
+			console.log("get");
+			res.send(data);
+		}
+	});
+})
+
+app.get("/adminGetReportedReviewDetail", (req,res)=>{
+	var connection = mysql.createConnection({
+		host : "localhost",
+		user : "serverDBManager", //mysql의 id
+		password : "0000", //mysql의 password
+		database : "dining", //사용할 데이터베이스
+		port : 3306
+	});
+	connection.connect();
+	const value = req.query.key;
+	console.log(value);
+	connection.query("SELECT * FROM review WHERE review_id = ?", [value], function(err,data){
+		if(err) throw err;
+		else{
+			console.log("get");
+			res.send(data);
+		}
+	});
+})
+
+app.get("/adminDeleteOriginReview", (req,res)=>{
+	var connection = mysql.createConnection({
+		host : "localhost",
+		user : "serverDBManager", //mysql의 id
+		password : "0000", //mysql의 password
+		database : "dining", //사용할 데이터베이스
+		port : 3306
+	});
+	connection.connect();
+	const value = req.query.key;
+	console.log(value);
+	connection.query("SELECT * FROM review WHERE review_id = ?", [value], function(err,data){
+		if(err) throw err;
+		else{
+			console.log("delete");
+			res.send(data);
+		}
+	});
+})
+
+app.get("/adminDeleteReport", (req,res)=>{
+	var connection = mysql.createConnection({
+		host : "localhost",
+		user : "serverDBManager", //mysql의 id
+		password : "0000", //mysql의 password
+		database : "dining", //사용할 데이터베이스
+		port : 3306
+	});
+	connection.connect();
+	const value = req.query.key;
+	console.log(value);
+	connection.query("SELECT * FROM report WHERE report_id = ?", [value], function(err,data){
+		if(err) throw err;
+		else{
+			console.log("delete");
+			res.send(data);
+		}
+	});
+})
+// =============================================

@@ -15,6 +15,14 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+
+const rows = [
+  createData(1, 1,'필동함박','2022-12-01', 0),
+  createData(2, 3,'이삭토스트','2022-12-02', 0),
+  createData(3, 5,'필동면옥','2022-12-03', 0),
+  createData(4, 7,'내가찜한닭','2022-12-04', 0),
+];
 
 function createData(report_id, review_id, restaurant, date, processed) {
   return {
@@ -32,6 +40,27 @@ function createData(report_id, review_id, restaurant, date, processed) {
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  
+  // 신고 수락 이벤트
+  function acceptReportRequest(reportID, reviewID) {
+    // 신고 수락 버튼을 눌렀으니, DB에서는 
+    // 1. 해당 리뷰를 report table에서 삭제한다.
+    axios()
+    // 2. 해당 리뷰를 review table에서 삭제한다.
+    axios()
+    // 그리고 다시 리스트를 띄운다.
+  }
+  // 신고 철회 이벤트
+  function deleteReportRequest(reportID){
+    // 신고 철회 버튼을 눌렀으니, DB에서는
+    // [해당 리뷰를 report table에서 삭제]한다.
+    axios({
+      method: 'delete',
+      url: 'http://localhost:3000/adminDeleteReport',
+      params: {'key': reportID}
+    })
+    // 그리고 다시 리스트를 띄운다.
+  }
 
   return (
     <React.Fragment>
@@ -60,8 +89,8 @@ function Row(props) {
                   Reported Review Detail
                 </Typography>
                 <Stack direction="row" spacing={2}>
-                  <Button variant="contained" color="success" size="small">신고 수락</Button>
-                  <Button variant="outlined" color="error" size="small">신고 철회</Button>
+                  <Button onClick={acceptReportRequest(row.report_id, row.review_id)} variant="contained" color="success" size="small">신고 수락</Button>
+                  <Button onClick={deleteReportRequest(row.report_id)} variant="outlined" color="error" size="small">신고 철회</Button>
                 </Stack>
               </Box>
               <Table size="small" aria-label="purchases">
@@ -114,13 +143,6 @@ Row.propTypes = {
     ).isRequired,
   }).isRequired,
 };
-
-const rows = [
-  createData(1, 1,'필동함박','2022-12-01', 0),
-  createData(2, 3,'이삭토스트','2022-12-02', 0),
-  createData(3, 5,'필동면옥','2022-12-03', 0),
-  createData(4, 7,'내가찜한닭','2022-12-04', 0),
-];
 
 export default function CollapsibleTable() {
   return (

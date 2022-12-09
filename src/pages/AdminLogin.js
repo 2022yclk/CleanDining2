@@ -50,7 +50,7 @@ function AdminLogin() {
         switch (response.data) {
           case "ERROR1":
             alert("Clean Dining에 오신것을 환영합니다");
-            return window.location.replace("/Main"); //추후 수정요함
+            return window.location.replace("/admin"); //추후 수정요함
           case "ERROR2":
             return alert("비밀번호를 다시 확인해주세요");
           case "ERROR3":
@@ -150,7 +150,7 @@ function AdminLogin() {
       control={<Checkbox value="remember" color="primary" />}
       label="Remember me"
       />
-      <Button type="submit" variant="contained" fullWidth sx={{ mt:3 }} onClick = {login}>로그로그인</Button>
+      <Button type="submit" variant="contained" fullWidth sx={{ mt:3 }} onClick = {login}>로그인</Button>
       <Grid container>
         <Grid item sx={{ mt:1 }} xs><Link>비밀번호는 잃어버리면 큰일나요 눌러도 아무 기능 없는 링크임</Link></Grid>
       </Grid>

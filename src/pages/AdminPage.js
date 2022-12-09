@@ -18,6 +18,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import CollapsibleTable from "../components/adminComponents/Table.js";
+import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 
 function Copyright(props) {
   return (
@@ -168,7 +169,20 @@ function AdminPage() {
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} lg={12}>
                 <Paper sx={{p: 2,display: 'flex',flexDirection: 'column',}}>
-                    <CollapsibleTable></CollapsibleTable>
+                  <div float="left">
+                    <ManageAccountsRoundedIcon sx={{ float:"left", fontSize:30 }}/>
+                    <Typography
+                      component="h1"
+                      variant="h6"
+                      color="inherit"
+                      noWrap
+                      sx={{ flexGrow: 1 }}
+                      fontFamily={"Nanum"}
+                    >
+                      리뷰 신고 목록(누적 신고 2회 이상)
+                    </Typography>
+                  </div>
+                  <CollapsibleTable></CollapsibleTable>
                 </Paper>
               </Grid>
             </Grid>
