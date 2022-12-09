@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import FindGpsApi from './FindGpsApi.js';
 import Loading from './Loading.js';
 import '../css/FindGps.css';
+import { flattenOptionGroups } from '@mui/base';
 
 const {kakao} = window; 
 
 const FindGps = () => {
 
-    const [Places, setPlaces] = useState([]);
+    //const [Places, setPlaces] = useState([]);
     const [addr, setAddr] = useState("");
+    const [print, setPrint] = useState("");
     const [latitude, setLatitude] = useState(null);
     const [longtitude, setLongtitude] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -37,8 +39,13 @@ const FindGps = () => {
         var callback = function(result, status){
             if(status === kakao.maps.services.Status.OK){
                 for(var i=0;i<result.length;i++){
+                    if(result[i].region_type==='H'){
+                        //console.log(result[i].region_3depth_name);
+                        setAddr(result[i].region_3depth_name);
+                        setLoading(false);
+                    }
                     if(result[i].region_type==='B'){
-                        setAddr(result[i].address_name);
+                        setPrint(result[i].address_name);
                     }
                 }
             }
@@ -46,15 +53,18 @@ const FindGps = () => {
     
         geocoder.coord2RegionCode(longtitude, latitude, callback);
     
+        /*
         const ps = new kakao.maps.services.Places();
     
-        var detailAddr = addr + ' 맛집';
+        //var detailAddr = addr + ' 맛집';
+        var detailAddr = '서울특별시 중구 퇴계로 197';
     
         ps.keywordSearch(detailAddr, placesSearchCB);
     
         function placesSearchCB(data, status, pagination){
             if(status === kakao.maps.services.Status.OK){
 
+                console.log(data);
                 address_duplicate(data);
                 
             } else if(status === kakao.maps.services.status.ERROR){
@@ -68,8 +78,8 @@ const FindGps = () => {
                 return;
     
             }
-        }
-    
+        }*/
+        /*
         function address_duplicate(data){
     
             var search_tmp = [];
@@ -89,15 +99,15 @@ const FindGps = () => {
         
         if(addr!==""){
             setLoading(false);
-        }
+        }*/
 
-    }, [addr, latitude, longtitude, Places]);
+    }, [latitude, longtitude, addr, print]);
 
     return(
         <>
         {
             loading ? <Loading /> :
-            <FindGpsApi addr={Places} printAddr={addr} />
+            <FindGpsApi addr={addr} print={print}/>
         }
         </>
     );
