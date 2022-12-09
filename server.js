@@ -344,27 +344,7 @@ app.get("/getReportedData", (req,res)=>{
 	connection.connect();
 	const value = req.query.key;
 	console.log(value);
-	connection.query("SELECT * FROM report WHERE report_id = ?", [value], function(err,data){
-		if(err) throw err;
-		else{
-			console.log("get");
-			res.send(data);
-		}
-	});
-})
-
-app.get("/adminGetReportedReviewDetail", (req,res)=>{
-	var connection = mysql.createConnection({
-		host : "localhost",
-		user : "serverDBManager", //mysql의 id
-		password : "0000", //mysql의 password
-		database : "dining", //사용할 데이터베이스
-		port : 3306
-	});
-	connection.connect();
-	const value = req.query.key;
-	console.log(value);
-	connection.query("SELECT * FROM review WHERE review_id = ?", [value], function(err,data){
+	connection.query("SELECT * FROM report INNER JOIN review ON (report.report_id = ? AND report.report_id = review.review_id)", [value], function(err,data){
 		if(err) throw err;
 		else{
 			console.log("get");
@@ -384,7 +364,7 @@ app.get("/adminDeleteOriginReview", (req,res)=>{
 	connection.connect();
 	const value = req.query.key;
 	console.log(value);
-	connection.query("SELECT * FROM review WHERE review_id = ?", [value], function(err,data){
+	connection.query("DELETE * FROM review WHERE review_id = ?", [value], function(err,data){
 		if(err) throw err;
 		else{
 			console.log("delete");
@@ -404,7 +384,7 @@ app.get("/adminDeleteReport", (req,res)=>{
 	connection.connect();
 	const value = req.query.key;
 	console.log(value);
-	connection.query("SELECT * FROM report WHERE report_id = ?", [value], function(err,data){
+	connection.query("DELETE * FROM report WHERE report_id = ?", [value], function(err,data){
 		if(err) throw err;
 		else{
 			console.log("delete");
