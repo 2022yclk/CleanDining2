@@ -74,7 +74,7 @@ const mdTheme = createTheme();
 
 function Main() {
   
-  //const {email} = useParams();
+  //console.log(sessionStorage.getItem("email"));
 
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {

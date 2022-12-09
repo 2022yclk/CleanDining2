@@ -19,13 +19,15 @@ function WriteReview() {
         const grade1 = grade;
         const content1 = content;
         const license = key;
+        const userEmail = sessionStorage.getItem("email");
         const requestURL = "http://52.79.70.2:3000/addReview";
         const reviewInfo = {
             'license': license,
             'title': title1,
             'visitDate': visitDate1,
             'grade': grade1,
-            'content': content1
+            'content': content1,
+            'userEmail' : userEmail
         }
         if(title===""){
             alert('제목을 입력해주세요');

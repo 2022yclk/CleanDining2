@@ -33,19 +33,32 @@ app.post("/addParty", (req,res)=> {
     const number = req.body.gather_num;
 	const content = req.body.content;
 	const due = req.body.duedate;
+	const email = req.body.userEmail;
     
-	console.log(partyTime);
-    //console.log(partydate, number, license);
-    connection.query("INSERT INTO findPeople(license_id, title, date, time, briefInfo, gather_num, content, dueDate) values (?,?,?,?,?,?,?,?)", 
-	[license, title, partydate, partyTime, brief, number, content, due], function(err,rows){
-        if(err) throw err;
-        else{
-            console.log("insert");
-			
-            //res.send("success");
-        }
-    });
-})
+	//ADDED By Koh
+	connection.query("SELECT id FROM users WHERE email = ?", [email], function(err, rows){
+		if(err) throw err;
+		else if(rows.length){
+			const userid = rows[0].id;
+			console.log(partyTime);
+			//console.log(partydate, number, license);
+			connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, time, briefInfo, gather_num, content, dueDate) values (?,?,?,?,?,?,?,?,?)", 
+			[userid, license, title, partydate, partyTime, brief, number, content, due], function(err,rows){
+				if(err) throw err;
+				else{
+					console.log("insert");
+					
+					//res.send("success");
+				}		
+				connection.end();
+			});
+		}
+		else {
+			res.send("ERROR: NO SUCH EMAIL IN DB");
+			connection.end();
+		}
+	});
+});
 
 app.post("/addReview", (req,res)=> {
     var connection = mysql.createConnection({
@@ -62,17 +75,29 @@ app.post("/addReview", (req,res)=> {
     const visitdate = req.body.visitDate;
     const grade = req.body.grade;
 	const content = req.body.content;
+	const email = req.body.userEmail;
     
-    //console.log(partydate, number, license);
-    connection.query("INSERT INTO review(license_id, title, date, grade, content) values (?,?,?,?,?)", 
-	[license, title, visitdate, grade, content], function(err,rows){
-        if(err) throw err;
-        else{
-            console.log("insert");
-            //res.send("success");
-        }
-    });
-})
+	//Added By Koh
+	connection.query("SELECT id FROM users WHERE email = ?", [email], function(err, rows){
+		if(err) throw err;
+		else if(rows.length){
+			const userid = rows[0].id;
+			//console.log(partydate, number, license);
+			connection.query("INSERT INTO review(writer_id, license_id, title, date, grade, content) values (?,?,?,?,?,?)", 
+			[userid, license, title, visitdate, grade, content], function(err,rows){
+				if(err) throw err;
+				else{
+					console.log("insert");
+					//res.send("success");
+				}
+			});
+		}
+		else {
+			res.send("ERROR: NO SUCH EMAIL IN DB");
+			connection.end();
+		}
+	});
+}) 
 
 app.post("/addAlert", (req, res) => {
 	var connection = mysql.createConnection({

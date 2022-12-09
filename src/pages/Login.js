@@ -19,6 +19,7 @@ const theme = createTheme();
 
 function Login() {
 
+  sessionStorage.Clear();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -50,7 +51,8 @@ function Login() {
         switch (response.data) {
           case "SUCCESS":
             alert("Clean Dining에 오신것을 환영합니다");
-            return window.location.replace(`/Main/`);
+            sessionStorage.setItem("email", emailInput);
+            return window.location.replace(`/Main`);
           case "ERROR1":
             return alert("비밀번호를 다시 확인해주세요");
           case "ERROR2":

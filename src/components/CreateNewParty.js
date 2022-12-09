@@ -4,7 +4,7 @@ import '../css/CreateNewParty.css';
 import axios from 'axios';
 
 function CreateNewParty() {
-
+    console.log(sessionStorage.getItem("email"));
     const { id, key } = useParams();
 
     const [title, setTitle] = useState("");
@@ -29,6 +29,7 @@ function CreateNewParty() {
         const content1 = content;
         const dueDate1 = dueDate;
         const license = key; // license_id
+        const userEmail = sessionStorage.getItem("email");
 
         const requestURL = "http://52.79.70.2:3000/addParty";
         const partyInfo = {
@@ -39,7 +40,8 @@ function CreateNewParty() {
             'briefInfo': briefInfo1,
             'gather_num': number1,
             'content': content1,
-            'duedate': dueDate1
+            'duedate': dueDate1,
+            'userEmail' : userEmail
         }
 
         if(number===null){
