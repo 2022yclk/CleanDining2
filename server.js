@@ -402,6 +402,68 @@ app.update("/adminInitAlertCnt", (req,res)=>{
 	});
 })
 // =============================================
+// 마이페이지
+//회원 탈퇴
+app.post("/deleteUser", (req,res)=>{
+	var connection = mysql.createConnection({
+		host : "localhost",
+		user : "serverDBManager", //mysql의 id
+		password : "0000", //mysql의 password
+		database : "dining", //사용할 데이터베이스
+		port : 3306
+	});
+	connection.connect();
+	const email = req.body.email;
+	connection.query("DELETE FROM users WHERE email = ?", [email], function(err,data){
+		if(err) throw err;
+		else{
+			console.log("delete User");
+			res.send("Delete User");
+		}
+	});
+})
+
+
+//내가 쓴 리뷰 확인
+app.get("/getMyReview", (req,res)=>{
+	var connection = mysql.createConnection({
+		host : "localhost",
+		user : "serverDBManager", //mysql의 id
+		password : "0000", //mysql의 password
+		database : "dining", //사용할 데이터베이스
+		port : 3306
+	});
+	connection.connect();
+	const email = req.body.email;
+	connection.query("SELECT * FROM users u, review r WHERE u.email = ? AND u.id = r.writer_id", [email], function(err,data){
+		if(err) throw err;
+		else{
+			console.log("Get my Review");
+			res.send(data);
+		}
+	});
+})
+
+// 내가 참여한 파티 확인하기
+app.get("/getMyParty", (req,res)=>{
+	var connection = mysql.createConnection({
+		host : "localhost",
+		user : "serverDBManager", //mysql의 id
+		password : "0000", //mysql의 password
+		database : "dining", //사용할 데이터베이스
+		port : 3306
+	});
+	connection.connect();
+	const email = req.body.email;
+	console.log(value);
+	connection.query("SELECT * FROM users u, findPeople f WHERE u.email = ? AND u.id = f.writer_id;", [email], function(err,data){
+		if(err) throw err;
+		else{
+			console.log("Get My Party");
+			res.send(data);
+		}
+	});
+})
 
 app.get("/ping", (req, res) => {
 	res.send("pong");
