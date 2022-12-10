@@ -156,7 +156,7 @@ function ReviewDetail() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              파티 참가
+              리뷰 상세정보
             </Typography>
             <IconButton color="inherit" onClick={gotoMain}>
             <HomeIcon />
@@ -197,7 +197,7 @@ function ReviewDetail() {
                     </div>
                     <div className="reviewTitle">
                         <label>방문한 날짜</label>
-                        {item.date}
+                        {item.date.slice(0,10)}
                     </div>
                     <div className="reviewTitle">
                         <label>작성자가 매긴 등급</label>
