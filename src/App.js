@@ -22,6 +22,7 @@ import Info from './pages/Info.js';
 import Review from './pages/Review.js';
 import JoinParty from './pages/JoinParty.js';
 import Mypage from './pages/Mypage.js';
+import ReviewDetail from './pages/ReviewDetail';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
        <Route path="/Review/:id/:key" element={<Review />} />
        <Route path="/JoinParty/:key/:postid" element={<JoinParty />}></Route>\
        <Route path="/Mypage" element={<Mypage />}/>
+       <Route path="/ReviewDetail/:key/:reviewid" element={<ReviewDetail />}/>
       </Routes>
     </Router>
   )
