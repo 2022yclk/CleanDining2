@@ -18,7 +18,8 @@ import axios from 'axios';
 const theme = createTheme();
 
 function AdminLogin() {
-  sessionStorage.Clear();
+  
+  //sessionStorage.Clear();
   const [adminID, setAdminID] = React.useState("");
   const [password, setPassword] = React.useState("");
 

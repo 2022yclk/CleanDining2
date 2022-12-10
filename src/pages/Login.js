@@ -19,7 +19,7 @@ const theme = createTheme();
 
 function Login() {
 
-  sessionStorage.Clear();
+  //sessionStorage.Clear();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
