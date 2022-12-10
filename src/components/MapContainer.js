@@ -47,7 +47,6 @@ function MapContainer({apiData, searchPlace}) {
                 let bounds = new kakao.maps.LatLngBounds();
 
                 for(let i=0; i<data.length; i++){
-                    console.log(data[i]);
                     for(var j=0; j<apiData.length; j++){
 
                         // openapi data에서 도로명 주소 가져와서 자르기

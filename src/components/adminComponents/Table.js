@@ -97,10 +97,10 @@ function Row(props) {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell component="th" scope="row">{item.date}</TableCell>
+          <TableCell component="th" scope="row">{item.date.slice(0,10)}</TableCell>
           <TableCell align="left">{item.writer_id}</TableCell>
           <TableCell align="left">{item.title}</TableCell>
-          <TableCell align="right">{item.license_id}</TableCell>
+          <TableCell align="right">{item.resName}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: "#ccc" }} colSpan={6}>
@@ -126,7 +126,7 @@ function Row(props) {
                   </TableHead>
                   <TableBody>
                     <TableRow key={item.review_id}>
-                      <TableCell component="th" scope="row">{item.date}</TableCell>
+                      <TableCell component="th" scope="row">{item.date.slice(0,10)}</TableCell>
                       <TableCell align="left">{item.writer_id}</TableCell>
                       <TableCell>{item.content}</TableCell>
                       <TableCell align="right">누적 {item.alertCnt}번</TableCell>
