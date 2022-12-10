@@ -49,26 +49,38 @@ function Row(props) {
   // };
 
   // 신고 수락 이벤트
-  function acceptReportRequest(reviewID) {
-    // 신고 수락 버튼을 눌렀으니, DB에서는 
-    // 2. 해당 리뷰를 review table에서 삭제한다.
+  function acceptReportRequest(reviewID, event) {
+    // 해당 리뷰를 review table에서 삭제한다.
+    event.preventDefault();
     axios({
       method: 'delete',
       url: 'http://52.79.70.2:3000/adminDeleteOriginReview',
       params: {'key': reviewID}
     })
-    // 그리고 다시 리스트를 띄운다.
+    .catch(error => {
+      return alert(error);
+    })
+    .then(response=>{
+      console.log(response.data);
+    })
+    window.location.reload();
   }
   // 신고 철회 이벤트
-  function deleteReportRequest(reviewID){
-    // 신고 철회 버튼을 눌렀으니, DB에서는
-    // [해당 리뷰를 report table에서 삭제]한다.
+  function deleteReportRequest(reviewID, event){
+    // [해당 리뷰의 alert cnt를 0으로 초기화한다.
+    event.preventDefault();
     axios({
       method: 'update',
       url: 'http://52.79.70.2:3000/adminInitAlertCnt',
       params: {'key': reviewID}
     })
-    // 그리고 다시 리스트를 띄운다.
+    .catch(error => {
+      return alert(error);
+    })
+    .then(response=>{
+      console.log(response.date);
+    })
+    window.location.reload();
   }
 
   return (
@@ -99,7 +111,7 @@ function Row(props) {
                     Reported Review Detail
                   </Typography>
                   <Stack direction="row" spacing={2}>
-                    <Button onClick={acceptReportRequest(item.review_id)} variant="contained" color="success" size="small">신고 수락</Button>
+                    <Button onClick={(event) => acceptReportRequest(item.review_id, event)} variant="contained" color="success" size="small">신고 수락</Button>
                     <Button onClick={deleteReportRequest(item.review_id)} variant="outlined" color="error" size="small">신고 철회</Button>
                   </Stack>
                 </Box>
@@ -147,6 +159,8 @@ Row.propTypes = {
 };
 
 export default function CollapsibleTable() {
+
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">

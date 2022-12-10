@@ -360,7 +360,7 @@ app.get("/getReportedData", (req,res)=>{
 	});
 })
 
-app.get("/adminDeleteOriginReview", (req,res)=>{
+app.delete("/adminDeleteOriginReview", (req,res)=>{
 	var connection = mysql.createConnection({
 		host : "localhost",
 		user : "serverDBManager", //mysql의 id
@@ -380,7 +380,7 @@ app.get("/adminDeleteOriginReview", (req,res)=>{
 	});
 })
 
-app.get("/adminInitAlertCnt", (req,res)=>{
+app.update("/adminInitAlertCnt", (req,res)=>{
 	var connection = mysql.createConnection({
 		host : "localhost",
 		user : "serverDBManager", //mysql의 id
