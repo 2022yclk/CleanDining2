@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -38,9 +38,9 @@ function Row(props) {
 
   function getReportList(){ // database 신고에 data 불러오기
     axios({
-      method: 'get',
-      url: 'http://52.79.70.2:3000/getReportedData'
-      //params: {'key': data}
+      method: 'get',  
+      url: 'http://52.79.70.2:3000/getReportedData',
+      params: {'key': data}
     }).then(res=>setData(res.data));
   }
 
@@ -49,14 +49,8 @@ function Row(props) {
   // };
 
   // 신고 수락 이벤트
-  function acceptReportRequest(reportID, reviewID) {
+  function acceptReportRequest(reviewID) {
     // 신고 수락 버튼을 눌렀으니, DB에서는 
-    // 1. 해당 리뷰를 report table에서 삭제한다.
-    axios({
-      method: 'delete',
-      url: 'http://52.79.70.2:3000/adminDeleteReport',
-      params: {'key': reportID}
-    })
     // 2. 해당 리뷰를 review table에서 삭제한다.
     axios({
       method: 'delete',
@@ -66,18 +60,19 @@ function Row(props) {
     // 그리고 다시 리스트를 띄운다.
   }
   // 신고 철회 이벤트
-  function deleteReportRequest(reportID){
+  function deleteReportRequest(reviewID){
     // 신고 철회 버튼을 눌렀으니, DB에서는
     // [해당 리뷰를 report table에서 삭제]한다.
     axios({
-      method: 'delete',
-      url: 'http://52.79.70.2:3000/adminDeleteReport',
-      params: {'key': reportID}
+      method: 'update',
+      url: 'http://52.79.70.2:3000/adminInitAlertCnt',
+      params: {'key': reviewID}
     })
     // 그리고 다시 리스트를 띄운다.
   }
 
   return (
+    //console.log("FULL Data is::", data) && data&& console.log("ㅎㅎ") && data.map((item)=>(
     data.map((item)=>(
       <React.Fragment>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -90,11 +85,10 @@ function Row(props) {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell component="th" scope="row">{item.report_id}</TableCell>
-          <TableCell align="left">{item.review_id}</TableCell>
-          <TableCell align="left">{item.restaurant}</TableCell>
-          <TableCell align="center">{item.date}</TableCell>
-          <TableCell align="right">{item.processed}</TableCell>
+          <TableCell component="th" scope="row">{item.date}</TableCell>
+          <TableCell align="left">{item.writer_id}</TableCell>
+          <TableCell align="left">{item.title}</TableCell>
+          <TableCell align="right">{item.license_id}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: "#ccc" }} colSpan={6}>
@@ -105,8 +99,8 @@ function Row(props) {
                     Reported Review Detail
                   </Typography>
                   <Stack direction="row" spacing={2}>
-                    <Button onClick={acceptReportRequest(item.report_id, item.review_id)} variant="contained" color="success" size="small">신고 수락</Button>
-                    <Button onClick={deleteReportRequest(item.report_id)} variant="outlined" color="error" size="small">신고 철회</Button>
+                    <Button onClick={acceptReportRequest(item.review_id)} variant="contained" color="success" size="small">신고 수락</Button>
+                    <Button onClick={deleteReportRequest(item.review_id)} variant="outlined" color="error" size="small">신고 철회</Button>
                   </Stack>
                 </Box>
                 <Table size="small" aria-label="purchases">
@@ -120,10 +114,10 @@ function Row(props) {
                   </TableHead>
                   <TableBody>
                     <TableRow key={item.review_id}>
-                      <TableCell component="th" scope="row">{item.r_date}</TableCell>
-                      <TableCell align="left">{item.r_writer_id}</TableCell>
-                      <TableCell>{item.r_contents}</TableCell>
-                      <TableCell align="right">누적 {item.r_report_cnt}번</TableCell>
+                      <TableCell component="th" scope="row">{item.date}</TableCell>
+                      <TableCell align="left">{item.writer_id}</TableCell>
+                      <TableCell>{item.content}</TableCell>
+                      <TableCell align="right">누적 {item.alertCnt}번</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -159,11 +153,10 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>ID&nbsp;</TableCell>
+            <TableCell>Date&nbsp;</TableCell>
             <TableCell align="left">Writer&nbsp;</TableCell>
-            <TableCell align="left">Restaurant&nbsp;(g)</TableCell>
-            <TableCell align="right">Date&nbsp;(YYYY-MM-DD)</TableCell>
-            <TableCell align="right">Processed&nbsp;(0/1)</TableCell>
+            <TableCell align="left">Review Title&nbsp;(g)</TableCell>
+            <TableCell align="right">Restaurant&nbsp;(YYYY-MM-DD)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

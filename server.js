@@ -373,7 +373,7 @@ app.get("/adminDeleteOriginReview", (req,res)=>{
 	connection.connect();
 	const value = req.query.key;
 	console.log(value);
-	connection.query("DELETE * FROM review WHERE review_id = ?", [value], function(err,data){
+	connection.query("DELETE FROM review WHERE review_id = ?", [value], function(err,data){
 		if(err) throw err;
 		else{
 			console.log("delete");
@@ -382,7 +382,7 @@ app.get("/adminDeleteOriginReview", (req,res)=>{
 	});
 })
 
-app.get("/adminDeleteReport", (req,res)=>{
+app.get("/adminInitAlertCnt", (req,res)=>{
 	var connection = mysql.createConnection({
 		host : "localhost",
 		user : "serverDBManager", //mysql의 id
@@ -393,7 +393,7 @@ app.get("/adminDeleteReport", (req,res)=>{
 	connection.connect();
 	const value = req.query.key;
 	console.log(value);
-	connection.query("DELETE * FROM report WHERE report_id = ?", [value], function(err,data){
+	connection.query("UPDATE review SET alertCnt = 0 WHERE review_id = ?", [value], function(err,data){
 		if(err) throw err;
 		else{
 			console.log("delete");
