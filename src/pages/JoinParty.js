@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled, createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -111,14 +111,23 @@ function JoinParty() {
       const requestURL = "http://52.79.70.2:3000/participateParty";
       const participateInfo = {
           'postid': postid,
+          'email': sessionStorage.getItem('email')
       }
       
       if(num==gather){
           alert('이미 모집인원이 다 찼습니다!');
       } else{
-          axios.post(requestURL, participateInfo).then(
-              alert('모임 참가 신청이 완료되었습니다. 주선자가 참가 신청을 수락하면 문자로 알림이 가게 됩니다!'),
-              window.history.back()
+          axios.post(requestURL, participateInfo).then(response=> {
+              switch (response.data) {
+                case "Already":
+                  alert("이미 참가중인 파티입니다!");
+                  return window.history.back();
+                case "Participated":
+                  return alert('모임 참가 신청이 완료되었습니다. 주선자가 참가 신청을 수락하면 문자로 알림이 가게 됩니다!');
+                default :
+                  return alert("ERROR");
+              }
+            }
           ).catch(
               error=>{
                   return alert(error);

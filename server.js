@@ -196,7 +196,7 @@ app.get("/getPartyData", (req,res)=>{
 	connection.connect();
 	const value = req.query.key;
 	console.log(value);
-	connection.query("SELECT * FROM findPeople WHERE license_id = ?", [value], function(err,data){
+	connection.query("SELECT * FROM users u, findPeople f WHERE u.id = f.writer_id AND license_id = ?", [value], function(err,data){
 		if(err) throw err;
 		else{
 			console.log("get");
@@ -472,22 +472,22 @@ app.get("/getMyReview", (req,res)=>{
 // 내가 참여한 파티 확인하기
 app.get("/getMyParty", (req,res)=>{
 	var connection = mysql.createConnection({
-		host : "localhost",
-		user : "serverDBManager", //mysql의 id
-		password : "0000", //mysql의 password
-		database : "dining", //사용할 데이터베이스
-		port : 3306
+	   host : "localhost",
+	   user : "serverDBManager", //mysql의 id
+	   password : "0000", //mysql의 password
+	   database : "dining", //사용할 데이터베이스
+	   port : 3306
 	});
 	connection.connect();
 	const email = req.query.email;
-	connection.query("SELECT * FROM users u, findPeople f WHERE u.email = ? AND u.id = f.writer_id;", [email], function(err,data){
-		if(err) throw err;
-		else{
-			console.log("Get My Party");
-			res.send(data);
-		}
+	connection.query("select * from user_party u, findPeople f where u.post_id = f.post_id AND u.email = ?", [email], function(err,data){
+	   if(err) throw err;
+	   else{
+		  console.log("Get My Party");
+		  res.send(data);
+	   }
 	});
-})
+ })
 
 app.get("/ping", (req, res) => {
 	res.send("pong");
