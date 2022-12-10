@@ -123,7 +123,8 @@ function JoinParty() {
                   alert("이미 참가중인 파티입니다!");
                   return window.history.back();
                 case "Participated":
-                  return alert('모임 참가 신청이 완료되었습니다. 주선자가 참가 신청을 수락하면 문자로 알림이 가게 됩니다!');
+                  alert('모임 참가 신청이 완료되었습니다!');
+                  return window.history.back();
                 default :
                   return alert("ERROR");
               }
