@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -31,15 +32,15 @@ function Row(props) {
   
   // database row 만들기 위한 데이터 구축
   const [data, setData] = React.useState([]); 
-  React.useEffect(()=>{
+  useEffect(()=>{
     getReportList(); // 컴포넌트가 렌더링될 때마다 데이터 불러오기
-  })
+  }, []);
 
   function getReportList(){ // database 신고에 data 불러오기
     axios({
       method: 'get',
-      url: 'http://52.79.70.2:3000/getReportedData',
-      params: {'key': data}
+      url: 'http://52.79.70.2:3000/getReportedData'
+      //params: {'key': data}
     }).then(res=>setData(res.data));
   }
 
@@ -77,7 +78,7 @@ function Row(props) {
   }
 
   return (
-    console.log("data in Table.js is::", data) && data && console.log("ㅎㅎ")&& data.product.map((item)=>(
+    data.map((item)=>(
       <React.Fragment>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
           <TableCell>
