@@ -28,7 +28,8 @@ app.post("/addParty", (req,res)=> {
 	const license = req.body.license;
 	const title = req.body.title;
     const partydate = req.body.date;
-	const partyTime = req.body.time;
+	const partyHour = req.body.hour;
+	const partyMin = req.body.min
 	const brief = req.body.briefInfo;
     const number = req.body.gather_num;
 	const content = req.body.content;
@@ -40,10 +41,10 @@ app.post("/addParty", (req,res)=> {
 		if(err) throw err;
 		else if(rows.length){
 			const userid = rows[0].id;
-	console.log(partyTime);
+	//console.log(partyTime);
     //console.log(partydate, number, license);
-			connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, time, briefInfo, gather_num, content, dueDate) values (?,?,?,?,?,?,?,?,?)", 
-			[userid, license, title, partydate, partyTime, brief, number, content, due], function(err,rows){
+			connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, hour, min, briefInfo, gather_num, content, dueDate) values (?,?,?,?,?,?,?,?,?,?)", 
+			[userid, license, title, partydate, partyHour, partyMin, brief, number, content, due], function(err,rows){
         if(err) throw err;
         else{
             console.log("insert");
