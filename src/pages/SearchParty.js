@@ -15,15 +15,20 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
+import '../css/FindPeopleWith.css';
+import axios from 'axios';
+import {useEffect, useState} from 'react';
+import { useParams } from "react-router-dom";
+import Button from '@mui/material/Button';
+import HomeIcon from '@mui/icons-material/Home';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Clean Dining
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -79,11 +84,53 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+function SearchParty() {
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+   
+    // 음식점 id value
+    const { id, addr, grade, key, addr2, phone, cat } = useParams();
+    const [data, setData] = useState([]);
+
+    const handleShow = (id, key, addr, addr2, grade, phone, cat, event) => {
+        event.preventDefault();
+        window.location.href = `http://localhost:3000/Info/${id}/${key}/${addr}/${addr2}/${grade}/${phone}/${cat}`;
+    }
+
+    const handleCreate = (data, key, event) => {
+        event.preventDefault();
+        window.location.href = `http://localhost:3000/PartyGen/${data}/${key}`;
+    }
+
+    const handleClick = (data, event) => {
+        event.preventDefault();
+        window.location.href = `http://localhost:3000/JoinParty/${key}/${data}`;
+    }
+    
+    function getList(){
+        axios({
+            method: 'get',
+            url: 'http://52.79.70.2:3000/getPartyData',
+            params: {'key': key}
+        }).then(res=>setData(res.data));
+    }
+
+    function toAdminLogin(e) {
+      window.location.href="/AdminLogin"
+    }
+
+    function gotoMain(e) {
+      window.location.href="/Main"
+    }
+
+    useEffect(()=>{
+
+        getList();
+
+    }, [])
+    
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -95,18 +142,6 @@ function DashboardContent() {
               pr: '24px',
             }}
           >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               component="h1"
               variant="h6"
@@ -114,40 +149,13 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              음식점 찾기
+              같이 먹을 사람 찾기
             </Typography>
-            <IconButton color="inherit">
-                <AccountBoxIcon />
+            <IconButton color="inherit" onClick={gotoMain}>
+            <HomeIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-          <center><FoodBankIcon />기능1</center>
-          <Divider sx={{ my: 2 }} />
-          </List>
-          <List component="nav">
-          <center><FoodBankIcon />기능2</center>
-            <Divider sx={{ my: 2 }} />
-          </List>
-          <List component="nav">
-          <center><FoodBankIcon />기능3</center>
-            <Divider sx={{ my: 2 }} />
-          </List>
-        </Drawer>
         <Box
           component="main"
           sx={{
@@ -169,13 +177,63 @@ function DashboardContent() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 600,
                   }}
                 >
+                  <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 300,
+                  }}
+                >
+                  <center><h1>{id}</h1></center>
+                  <center><h2>{addr}</h2></center>
+                  <center><h2>위생등급 : {grade}</h2></center>
+                </Paper>
+                <Grid container>
+                <Grid item sx={{ mt:1 }} xs>
+                <Button variant="contained" color="success" onClick={(event) => handleCreate(id, key, event)}>새로운 파티 만들기</Button>
+                </Grid>
+                <Grid item sx={{ mt:1 }}>
+                <Button variant="outlined" color="success" onClick={(event) => handleShow(id, key, addr, addr2, grade, phone, cat, event)}>음식점 세부정보 및 리뷰보기</Button>
+                </Grid>
+                </Grid>
+                <Paper
+                  sx={{
+                    mt: 10,
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <center><h2>파티리스트</h2></center>
+                  <center>{data.map((item)=>(
+                        <div className="partylist">
+                            <div className="pi-top">
+                                <div>{item.writer_id}admin34(Test Value)</div>
+                                <button onClick={(event)=>handleClick(item.post_id, event)}>파티 확인</button>
+                            </div>
+                            <div className="pi-mid">
+                                {item.title}
+                            </div>
+                            <div className="pi-btm">
+                                <div className="pi-btm-date">{item.date.slice(0,10)}</div>
+                                <div className="pi-btm-txt">현재 인원&nbsp;/&nbsp;정원</div>
+                                <div className="pi-btm-num">{item.gathered}&nbsp;/&nbsp;{item.gather_num}</div>
+                            </div>
+                        </div>
+                    ))}
+                </center>
+                </Paper>
                 </Paper>
               </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                <Link
+                  onClick={toAdminLogin}>
+                  by Team YLCK in SW Engineering 2022
+                </Link>
                 </Paper>
               </Grid>
             </Grid>
@@ -186,6 +244,4 @@ function DashboardContent() {
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
-}
+export default SearchParty;

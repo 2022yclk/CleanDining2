@@ -15,7 +15,6 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import HomeIcon from '@mui/icons-material/Home';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -23,6 +22,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const drawerWidth = 240;
 
@@ -44,31 +45,6 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      boxSizing: 'border-box',
-      ...(!open && {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9),
-        },
-      }),
-    },
-  }),
-);
 
 const mdTheme = createTheme();
 
@@ -92,6 +68,12 @@ function Main() {
   function toAdminLogin(e) {
     window.location.href="/AdminLogin"
   }
+  function toMypage(e) {
+    window.location.href="/Mypage"
+  }
+  function toLogin(e) {
+    window.location.href="/"
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -103,18 +85,6 @@ function Main() {
               pr: '24px',
             }}
           >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               component="h1"
               variant="h6"
@@ -122,40 +92,16 @@ function Main() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              <FoodBankIcon /> 음식점 찾기
+              <FoodBankIcon /> Clean Dining에 오신걸 환영합니다
             </Typography>
-            <IconButton color="inherit">
-                <HomeIcon />
+            <IconButton color="inherit" onClick={toLogin}>
+            <ExitToAppIcon />
+            </IconButton>
+            <IconButton color="inherit" onClick={toMypage}>
+            <AccountBoxIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-          <center><FoodBankIcon />기능1</center>
-          <Divider sx={{ my: 2 }} />
-          </List>
-          <List component="nav">
-          <center><FoodBankIcon />기능2</center>
-            <Divider sx={{ my: 2 }} />
-          </List>
-          <List component="nav">
-          <center><FoodBankIcon />기능3</center>
-            <Divider sx={{ my: 2 }} />
-          </List>
-        </Drawer>
         <Box
           component="main"
           sx={{

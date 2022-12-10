@@ -21,6 +21,7 @@ import {useState} from 'react';
 import MapContainer from '../components/MapContainer.js';
 import Loading from '../components/Loading.js';
 import '../css/SearchPlace.css';
+import Button from '@mui/material/Button'
 
 function Copyright(props) {
   return (
@@ -150,18 +151,6 @@ function SearchRest() {
               pr: '24px',
             }}
           >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               component="h1"
               variant="h6"
@@ -176,33 +165,6 @@ function SearchRest() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-          <center><FoodBankIcon />기능1</center>
-          <Divider sx={{ my: 2 }} />
-          </List>
-          <List component="nav">
-          <center><FoodBankIcon />기능2</center>
-            <Divider sx={{ my: 2 }} />
-          </List>
-          <List component="nav">
-          <center><FoodBankIcon />기능3</center>
-            <Divider sx={{ my: 2 }} />
-          </List>
-        </Drawer>
         <Box
           component="main"
           sx={{
@@ -223,7 +185,7 @@ function SearchRest() {
                   <div class="search-bar">
                     <form class="inputForm" onSubmit={handleSubmit}>
                       <input class="input" placeholder="검색해보세요... [Ex) 경기도 시흥시 승지로]" onChange={onChange} value={inputText} />
-                      <button class="search" type="submit">찾기!</button>
+                      <button class="search" type="submit">Go</button>
                     </form>
                   </div>
                   <Paper alignItem='center'>{loading ? <Loading /> : <MapContainer apiData={dataMap} searchPlace={place} />}</Paper>

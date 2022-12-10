@@ -147,14 +147,7 @@ function AdminLogin() {
       }}
       sx={{ mt:3 }}
       />
-      <FormControlLabel 
-      control={<Checkbox value="remember" color="primary" />}
-      label="Remember me"
-      />
       <Button type="submit" variant="contained" fullWidth sx={{ mt:3 }} onClick = {login}>로그인</Button>
-      <Grid container>
-        <Grid item sx={{ mt:1 }} xs><Link>비밀번호는 잃어버리면 큰일나요 눌러도 아무 기능 없는 링크임</Link></Grid>
-      </Grid>
     </Container>
     </Box>
     </Grid>

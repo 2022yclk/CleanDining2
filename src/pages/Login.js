@@ -125,11 +125,11 @@ function Login() {
          <LockOutlinedIcon />
          </Avatar>
          <Typography component="h1" variant="h5">
-         로그인
+         Clean Dining에 로그인하세요!
          </Typography>
        </Box>
       <TextField 
-      label="Email Address" 
+      label="Email Address 형태의 아이디를 입력하세요" 
       required 
       fullWidth 
       name="email"
@@ -140,7 +140,7 @@ function Login() {
       autoFocus
       />
       <TextField 
-      label="Password" 
+      label="비밀번호" 
       type="password" 
       required 
       fullWidth 
@@ -151,13 +151,8 @@ function Login() {
       }}
       sx={{ mt:3 }}
       />
-      <FormControlLabel 
-      control={<Checkbox value="remember" color="primary" />}
-      label="Remember me"
-      />
-      <Button type="submit" variant="contained" fullWidth sx={{ mt:3 }} onClick = {login}>록으인</Button>
+      <Button type="submit" variant="contained" fullWidth sx={{ mt:3 }} onClick = {login}>로그인</Button>
       <Grid container>
-        <Grid item sx={{ mt:1 }} xs><Link>비밀번호 찾기</Link></Grid>
         <Grid item sx={{ mt:1 }}><Link onClick = {handleClick}>회원 가입</Link></Grid>
         <br />
         <br />

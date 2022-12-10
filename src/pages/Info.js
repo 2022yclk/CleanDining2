@@ -15,8 +15,13 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import '../css/WatchDetailInfo.css';
+import axios from 'axios';
+import Button from '@mui/material/Button';
+import HomeIcon from '@mui/icons-material/Home';
 
 function Copyright(props) {
   return (
@@ -79,11 +84,80 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+function Info() {
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  function gotoMain(e) {
+    window.location.href="/Main"
+  }
+  
+  const {id, addr, grade, key, addr2, phone, cat} = useParams();
+
+  const [data, setData] = useState([]);
+  
+  const handleReview = (event) => {
+      event.preventDefault();
+      window.location.href = `http://localhost:3000/Review/${id}/${key}`;
+  }
+
+  const handleClick = (review_id, event) => {
+      event.preventDefault();
+      window.location.href = `http://localhost:3000/showReview/${key}/${review_id}`;
+  }
+
+  const handleAlert = (review_id, event) => {
+      event.preventDefault();
+
+      const requestURL = 'http://52.79.70.2:3000/addAlert';
+      const alertInfo = {
+          'review_id': review_id,
+      }
+
+      axios.post(requestURL, alertInfo).then(
+          alert('해당 리뷰에 대한 신고가 접수되었습니다. 신고 접수 처리까지는 2~3일 소요됩니다. 감사합니다.'),
+          window.location.reload()
+      );
+  }
+
+  const handleRecommend = (review_id, event) => {
+      event.preventDefault();
+
+      const requestURL = 'http://52.79.70.2:3000/addRecommend';
+      const recomInfo = {
+          'review_id': review_id,
+      }
+
+      axios.post(requestURL, recomInfo).then(
+          alert('해당 리뷰가 추천 되었습니다!'),
+          window.location.reload()
+      );
+  }
+
+  const handleSanitary = (event) => {
+      event.preventDefault();
+      window.open("https://www.foodsafetykorea.go.kr/minwon/complain/complainIntro.do");
+  }
+
+  function getList(){
+      axios({
+          method: 'get',
+          url: 'http://52.79.70.2:3000/getReviewData',
+          params: {'key': key}
+      }).then(res=>setData(res.data));
+  }
+
+  function toAdminLogin(e) {
+    window.location.href="/AdminLogin"
+  }
+
+  useEffect(()=>{
+
+      getList();
+
+  }, [])
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -95,18 +169,6 @@ function DashboardContent() {
               pr: '24px',
             }}
           >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               component="h1"
               variant="h6"
@@ -114,40 +176,13 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              음식점 찾기
+              음식점 정보와 리뷰
             </Typography>
-            <IconButton color="inherit">
-                <AccountBoxIcon />
+            <IconButton color="inherit" onClick={gotoMain}>
+            <HomeIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-          <center><FoodBankIcon />기능1</center>
-          <Divider sx={{ my: 2 }} />
-          </List>
-          <List component="nav">
-          <center><FoodBankIcon />기능2</center>
-            <Divider sx={{ my: 2 }} />
-          </List>
-          <List component="nav">
-          <center><FoodBankIcon />기능3</center>
-            <Divider sx={{ my: 2 }} />
-          </List>
-        </Drawer>
         <Box
           component="main"
           sx={{
@@ -169,13 +204,73 @@ function DashboardContent() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 600,
                   }}
                 >
+                  <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                    <center>{cat}</center>
+                    <center><h1>{id}</h1></center>
+                    <center><h2>{addr}</h2></center>
+                    <center><h2>위생등급 : {grade}</h2></center>
+                    <div>Tel)&nbsp;{phone}</div>
+                </Paper>
+                <Grid container>
+                <Grid item sx={{ mt:1 }} xs>
+                <Button variant="contained" color="error" onClick={(event) => handleSanitary(event)}>더러운 음식점이에요! 신고합니다!</Button>
+                </Grid>
+                <Grid item sx={{ mt:1 }}>
+                <Button variant="contained" color="success" onClick={(event) => handleReview(event)}>리뷰 쓰기</Button>
+                </Grid>
+                </Grid>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    mt: 4
+                  }}
+                >
+                    <center><h1>최근에 작성된 리뷰들...</h1></center>
+                    <div className="wd-bottom">
+                        <div className="list">
+                            {data.map((item)=>(
+                                <div className="partylist">
+                                    <div className="wd-top">
+                                        <div>{item.writer_id}admin34(Test Value)</div>
+                                        <button className="wd-btn" onClick={(event) => handleRecommend(item.review_id, event)}>추천</button>
+                                        <button className="wd-btn" onClick={(event) => handleAlert(item.review_id, event)}>신고</button>
+                                    </div>
+                                    <div className="wd-mid" onClick={(event)=>handleClick(item.review_id, event)}>
+                                        <div className="wd-midtitle">
+                                            <div className="wd-midtitle-1">{item.title}</div>
+                                            <div className="wd-midtitle-2">추천 수&nbsp;&nbsp;{item.recomCnt}</div>
+                                        </div>
+                                        <div className="wd-midcon">{item.content}</div>
+                                    </div>
+                                    <div className="wd-btm">
+                                        <div className="wd-btm-date">{item.date.slice(0,10)} 방문</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+            </div>
+            <br />
+            <br />
+                </Paper>
                 </Paper>
               </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                <Link
+                  onClick={toAdminLogin}>
+                  by Team YLCK in SW Engineering 2022
+                  </Link>
                 </Paper>
               </Grid>
             </Grid>
@@ -186,6 +281,4 @@ function DashboardContent() {
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
-}
+export default Info;
