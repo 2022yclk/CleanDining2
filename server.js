@@ -382,7 +382,7 @@ app.delete("/adminDeleteOriginReview", (req,res)=>{
 	});
 })
 
-app.update("/adminInitAlertCnt", (req,res)=>{
+app.post("/adminInitAlertCnt", (req,res)=>{
 	var connection = mysql.createConnection({
 		host : "localhost",
 		user : "serverDBManager", //mysql의 id

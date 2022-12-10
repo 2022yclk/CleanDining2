@@ -70,7 +70,7 @@ function Row(props) {
     // [해당 리뷰의 alert cnt를 0으로 초기화한다.
     event.preventDefault();
     axios({
-      method: 'update',
+      method: 'post',
       url: 'http://52.79.70.2:3000/adminInitAlertCnt',
       params: {'key': reviewID}
     })
@@ -112,7 +112,7 @@ function Row(props) {
                   </Typography>
                   <Stack direction="row" spacing={2}>
                     <Button onClick={(event) => acceptReportRequest(item.review_id, event)} variant="contained" color="success" size="small">신고 수락</Button>
-                    <Button onClick={deleteReportRequest(item.review_id)} variant="outlined" color="error" size="small">신고 철회</Button>
+                    <Button onClick={(event) => deleteReportRequest(item.review_id, event)} variant="outlined" color="error" size="small">신고 철회</Button>
                   </Stack>
                 </Box>
                 <Table size="small" aria-label="purchases">
