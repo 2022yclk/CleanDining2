@@ -25,41 +25,49 @@ app.post("/addParty", (req,res)=> {
     });
 
     connection.connect();
-	const license = req.body.license;
-	const title = req.body.title;
+   const license = req.body.license;
+   const title = req.body.title;
     const partydate = req.body.date;
-	const partyHour = req.body.hour;
-	const partyMin = req.body.min
-	const brief = req.body.briefInfo;
+   const partyHour = req.body.hour;
+   const partyMin = req.body.min
+   const brief = req.body.briefInfo;
     const number = req.body.gather_num;
-	const content = req.body.content;
-	const due = req.body.duedate;
-	const resName = req.body.resName;
-	const email = req.body.userEmail;
+   const content = req.body.content;
+   const due = req.body.duedate;
+   const resName = req.body.resName;
+   const email = req.body.userEmail;
     
-	//ADDED By Koh
-	connection.query("SELECT id FROM users WHERE email = ?", [email], function(err, rows){
-		if(err) throw err;
-		else if(rows.length){
-			const userid = rows[0].id;
-	//console.log(partyTime);
-    //console.log(partydate, number, license);
-			connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, hour, min, briefInfo, gather_num, content, dueDate, resName) values (?,?,?,?,?,?,?,?,?,?,?)", 
-			[userid, license, title, partydate, partyHour, partyMin, brief, number, content, due, resName], function(err,rows){
-        if(err) throw err;
-        else{
-            console.log("insert");
-			
-            //res.send("success");
-        }
-				connection.end();
-    });
-		}
-		else {
-			res.send("ERROR: NO SUCH EMAIL IN DB");
-			connection.end();
-		}
-	});
+   //ADDED By Koh
+   connection.query("SELECT id FROM users WHERE email = ?", [email], function(err, rows){
+      if(err) throw err;
+      else if(rows.length){
+         const userid = rows[0].id;
+         connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, hour, min, briefInfo, gather_num, content, dueDate, resName) values (?,?,?,?,?,?,?,?,?,?,?)", 
+         [userid, license, title, partydate, partyHour, partyMin, brief, number, content, due, resName], function(err,rows){
+              if(err) throw err;
+              else{
+                  console.log("insert at findPeople");
+              }
+          });
+         connection.query("SELECT post_id FROM findPeople WHERE writer_id = ? AND date = ? AND hour = ? AND min = ? AND license_id = ?", [userid, partydate, partyHour, partyMin, license],function(err, rows){
+            if(err) throw err;
+            else {
+               const postid = rows[0].post_id;
+               connection.query("INSERT INTO user_party(email, post_id) value (?,?)", [userid,postid], function(err, rows){
+                  if(err) throw err;
+                  else {
+                     console.log("insert at user_party");
+                  }
+               })
+            }
+         })
+         connection.end();
+      }
+      else {
+         res.send("ERROR: NO SUCH EMAIL IN DB");
+         connection.end();
+      }
+   });
 });
 
 app.post("/addReview", (req,res)=> {
@@ -140,24 +148,32 @@ app.post("/addRecommend", (req, res) => {
 	});
 })
 
-
 app.post("/participateParty", (req, res) => {
 	var connection = mysql.createConnection({
-		host: "localhost",
-		user: "serverDBManager",
-		password: "0000",
-		databse: "dining",
-		port: 3306
+	   host: "localhost",
+	   user: "serverDBManager",
+	   password: "0000",
+	   databse: "dining",
+	   port: 3306
 	});
 	connection.connect();
 	const postid = req.body.postid;
+	const email = req.body.email;
 	connection.query("UPDATE dining.findPeople SET gathered = gathered + 1 WHERE post_id = ?", [postid], function(err,rows){
-		if(err) throw err;
-		else{
-			console.log("participate success");
-		}
+	   if(err) throw err;
+	   else{
+		  console.log("participate success");
+		  connection.query("INSERT INTO user_party(email, post_id) value (?,?)",[email, postid],function(err, rows){
+			 if(err) throw err;
+			 else {
+				console.log("Insert at user_party");
+			 }
+		  })
+	   }
 	});
-})
+	connection.end();
+ })
+ 
 
 app.get("/getPartyData", (req,res)=>{
 	var connection = mysql.createConnection({
