@@ -238,7 +238,7 @@ function Info() {
                 >
                     <center><h1>최근에 작성된 리뷰들...</h1></center>
                     <div className="wd-bottom">
-                        <div className="list">
+                        <div className="review-list">
                             {data.map((item)=>(
                                 <div className="partylist">
                                     <div className="wd-top">

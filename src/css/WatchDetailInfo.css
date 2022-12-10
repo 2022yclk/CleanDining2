@@ -1,12 +1,12 @@
 .review-btn{width: 150px;position: relative;left: 100px;top: 20px;height: 30px;margin:20px 20px 10px 0 ;}
 .watch-bottom{position: relative;top:50px;left:50px;}
-.review-list{position: relative;top:70px;left:50px;margin-bottom:10px;}
+.review-list{position: relative;margin-bottom:10px;}
 .review-list ul{list-style: none;}
 .reviewlist{height:100px;width:350px;border:1px solid black;border-radius:10px;margin-bottom:10px;}
 .showad{position:relative;left:30px;}
 .w-grade{display:flex;position:relative;left:300px;top:-20px;}
 .reviewUlItem{display:grid;position:relative;width:950px;}
-.wd-bottom{display: grid;position:relative;top:50px;left:45px;}
+.wd-bottom{display: grid;position:relative;}
 
 .wd-cate{position:relative;left:30px;top:40px;}
 .wd-top{height:30px;display:flex;background: #b4d4c9;border-radius:10px 10px 0 0;}
@@ -22,3 +22,4 @@
 .wd-midcon{font-size:15px;margin-left:40px;}
 .wd-btm{height:30px;display:flex;}
 .wd-btm-date{margin: 7px 0 0 230px; font-size:13px;}
+.list{margin:auto}

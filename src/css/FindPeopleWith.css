@@ -7,7 +7,7 @@
 .party{font-size:20px;}
 .list{margin-top:15px;}
 .list ul{list-style: none;}
-.partylist{height:130px;width:350px;border:none;border-radius:10px;margin: 0 0 30px 40px;background:#dceff5;}
+.partylist{height:130px;width:350px;border:none;border-radius:10px;margin: 20px 20px 20px 20px;background:#dceff5;}
 .grade{display:flex;}
 .gradeTitle{ margin-right:15px;}
 .gradegrade{color:red;}
