@@ -423,7 +423,6 @@ app.post("/deleteUser", (req,res)=>{
 	});
 })
 
-
 //내가 쓴 리뷰 확인
 app.get("/getMyReview", (req,res)=>{
 	var connection = mysql.createConnection({
@@ -434,7 +433,7 @@ app.get("/getMyReview", (req,res)=>{
 		port : 3306
 	});
 	connection.connect();
-	const email = req.body.email;
+	const email = req.query.email;
 	connection.query("SELECT * FROM users u, review r WHERE u.email = ? AND u.id = r.writer_id", [email], function(err,data){
 		if(err) throw err;
 		else{
@@ -454,8 +453,7 @@ app.get("/getMyParty", (req,res)=>{
 		port : 3306
 	});
 	connection.connect();
-	const email = req.body.email;
-	//console.log(value);
+	const email = req.query.email;
 	connection.query("SELECT * FROM users u, findPeople f WHERE u.email = ? AND u.id = f.writer_id;", [email], function(err,data){
 		if(err) throw err;
 		else{
