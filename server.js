@@ -40,18 +40,18 @@ app.post("/addParty", (req,res)=> {
 		if(err) throw err;
 		else if(rows.length){
 			const userid = rows[0].id;
-			console.log(partyTime);
-			//console.log(partydate, number, license);
+	console.log(partyTime);
+    //console.log(partydate, number, license);
 			connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, time, briefInfo, gather_num, content, dueDate) values (?,?,?,?,?,?,?,?,?)", 
 			[userid, license, title, partydate, partyTime, brief, number, content, due], function(err,rows){
-				if(err) throw err;
-				else{
-					console.log("insert");
-					
-					//res.send("success");
-				}		
+        if(err) throw err;
+        else{
+            console.log("insert");
+			
+            //res.send("success");
+        }
 				connection.end();
-			});
+    });
 		}
 		else {
 			res.send("ERROR: NO SUCH EMAIL IN DB");
@@ -82,22 +82,22 @@ app.post("/addReview", (req,res)=> {
 		if(err) throw err;
 		else if(rows.length){
 			const userid = rows[0].id;
-			//console.log(partydate, number, license);
+    //console.log(partydate, number, license);
 			connection.query("INSERT INTO review(writer_id, license_id, title, date, grade, content) values (?,?,?,?,?,?)", 
 			[userid, license, title, visitdate, grade, content], function(err,rows){
-				if(err) throw err;
-				else{
-					console.log("insert");
-					//res.send("success");
-				}
-			});
+        if(err) throw err;
+        else{
+            console.log("insert");
+            //res.send("success");
+        }
+    });
 		}
 		else {
 			res.send("ERROR: NO SUCH EMAIL IN DB");
 			connection.end();
 		}
 	});
-}) 
+})
 
 app.post("/addAlert", (req, res) => {
 	var connection = mysql.createConnection({
@@ -335,26 +335,6 @@ app.post("/adminloginVerify", (req, res) =>{
      })
 });
 
-app.get("/ping", (req, res) => {
-	  res.send("pong");
-	console.log("/ping CALLED");
-});
-
-app.use(express.static(path.join(__dirname, "build")));
-
-app.get("/*", (req, res) => {
-	  res.set({
-		      "Cache-Control": "no-cache, no-store, must-revalidate",
-		      Pragma: "no-cache",
-		      Date: Date.now()
-		    });
-	  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
-http.createServer(app).listen(port, () => {
-	  console.log(`app listening at ${port}`);
-});
-
 // =============================================
 // ADMIN
 // =============================================
@@ -367,9 +347,10 @@ app.get("/getReportedData", (req,res)=>{
 		port : 3306
 	});
 	connection.connect();
-	const value = req.query.key;
-	console.log(value);
-	connection.query("SELECT * FROM report INNER JOIN review ON (report.report_id = ? AND report.report_id = review.review_id)", [value], function(err,data){
+	//const value = req.query.key;
+	//console.log("in server.js > value is::");
+	//console.log(value);
+	connection.query("SELECT * FROM review WHERE alertCnt > 1", function(err,data){
 		if(err) throw err;
 		else{
 			console.log("get");
@@ -418,3 +399,23 @@ app.get("/adminDeleteReport", (req,res)=>{
 	});
 })
 // =============================================
+
+app.get("/ping", (req, res) => {
+	res.send("pong");
+  console.log("/ping CALLED");
+});
+
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/*", (req, res) => {
+	res.set({
+			"Cache-Control": "no-cache, no-store, must-revalidate",
+			Pragma: "no-cache",
+			Date: Date.now()
+		  });
+	res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+http.createServer(app).listen(port, () => {
+	console.log(`app listening at ${port}`);
+});

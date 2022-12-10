@@ -35,8 +35,7 @@ function Row(props) {
     getReportList(); // 컴포넌트가 렌더링될 때마다 데이터 불러오기
   })
 
-  function getReportList(){ // database 신고 불러오기
-    console.log(data);
+  function getReportList(){ // database 신고에 data 불러오기
     axios({
       method: 'get',
       url: 'http://52.79.70.2:3000/getReportedData',
@@ -54,13 +53,13 @@ function Row(props) {
     // 1. 해당 리뷰를 report table에서 삭제한다.
     axios({
       method: 'delete',
-      url: 'http://localhost:3000/adminDeleteReport',
+      url: 'http://52.79.70.2:3000/adminDeleteReport',
       params: {'key': reportID}
     })
     // 2. 해당 리뷰를 review table에서 삭제한다.
     axios({
       method: 'delete',
-      url: 'http://localhost:3000/adminDeleteOriginReview',
+      url: 'http://52.79.70.2:3000/adminDeleteOriginReview',
       params: {'key': reviewID}
     })
     // 그리고 다시 리스트를 띄운다.
@@ -71,14 +70,14 @@ function Row(props) {
     // [해당 리뷰를 report table에서 삭제]한다.
     axios({
       method: 'delete',
-      url: 'http://localhost:3000/adminDeleteReport',
+      url: 'http://52.79.70.2:3000/adminDeleteReport',
       params: {'key': reportID}
     })
     // 그리고 다시 리스트를 띄운다.
   }
 
   return (
-    console.log(data) && data && data.product.map((item)=>(
+    console.log("data in Table.js is::", data) && data && console.log("ㅎㅎ")&& data.product.map((item)=>(
       <React.Fragment>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
           <TableCell>
