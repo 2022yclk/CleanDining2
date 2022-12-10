@@ -98,8 +98,8 @@ function NearestRest() {
     window.location.href="/Main"
   }
 
-  const [Places, setPlaces] = useState([]);
   const [addr, setAddr] = useState("");
+  const [print, setPrint] = useState("");
   const [latitude, setLatitude] = useState(null);
   const [longtitude, setLongtitude] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -128,8 +128,13 @@ function NearestRest() {
       var callback = function(result, status){
           if(status === kakao.maps.services.Status.OK){
               for(var i=0;i<result.length;i++){
+                  if(result[i].region_type==='H'){
+                      //console.log(result[i].region_3depth_name);
+                      setAddr(result[i].region_3depth_name);
+                      setLoading(false);
+                  }
                   if(result[i].region_type==='B'){
-                      setAddr(result[i].address_name);
+                      setPrint(result[i].address_name);
                   }
               }
           }
@@ -137,52 +142,8 @@ function NearestRest() {
   
       geocoder.coord2RegionCode(longtitude, latitude, callback);
   
-      const ps = new kakao.maps.services.Places();
-  
-      var detailAddr = addr + ' 맛집';
-  
-      ps.keywordSearch(detailAddr, placesSearchCB);
-  
-      function placesSearchCB(data, status, pagination){
-          if(status === kakao.maps.services.Status.OK){
+  }, [latitude, longtitude, addr, print]);
 
-              address_duplicate(data);
-              
-          } else if(status === kakao.maps.services.status.ERROR){
-  
-              alert('오류 발생');
-              return;
-  
-          } else if(status === kakao.maps.services.status.ZERO_RESULT){
-  
-              alert('검색결과가 존재하지 않습니다');
-              return;
-  
-          }
-      }
-  
-      function address_duplicate(data){
-  
-          var search_tmp = [];
-  
-          for(var i=0; i<data.length; i++){
-              var tmp = data[i].road_address_name;
-              var tmp1 = tmp.indexOf('로');
-              var tmp2 = tmp.indexOf(' ');
-              var tmp3 = tmp.slice(tmp2+1, tmp1+1);
-              search_tmp.push(tmp3);
-          }
-  
-          let search = [...new Set(search_tmp)];
-
-          setPlaces(search);
-      }
-      
-      if(addr!==""){
-          setLoading(false);
-      }
-
-  }, [addr, latitude, longtitude, Places]);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -271,10 +232,12 @@ function NearestRest() {
                     height: 800,
                   }}
                 >
-                    {
-                     loading ? <Loading /> :
-                     <FindGpsApi addr={Places} printAddr={addr} />
-                    }
+                    <>
+                      {
+                        loading ? <Loading /> :
+                        <FindGpsApi addr={addr} print={print}/>
+                      }
+                    </>
                 </Paper>
               </Grid>
               <Grid item xs={12}>
