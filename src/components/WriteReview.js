@@ -19,7 +19,6 @@ function WriteReview() {
         const grade1 = grade;
         const content1 = content;
         const license = key;
-        const resname = id;
         const userEmail = sessionStorage.getItem("email");
         const requestURL = "http://52.79.70.2:3000/addReview";
         const reviewInfo = {
@@ -28,7 +27,6 @@ function WriteReview() {
             'visitDate': visitDate1,
             'grade': grade1,
             'content': content1,
-            'resName': resname,
             'userEmail' : userEmail
         }
         if(title===""){

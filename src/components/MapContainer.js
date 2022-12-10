@@ -47,6 +47,7 @@ function MapContainer({apiData, searchPlace}) {
                 let bounds = new kakao.maps.LatLngBounds();
 
                 for(let i=0; i<data.length; i++){
+                    console.log(data[i]);
                     for(var j=0; j<apiData.length; j++){
 
                         // openapi data에서 도로명 주소 가져와서 자르기
@@ -130,7 +131,7 @@ function MapContainer({apiData, searchPlace}) {
                                        
                                        <div class="desc" style="position: relative;margin: 10px 10px 10px 10px;height: 100px;">
                                             <div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소)${place.road_address_name}</div>
-                                            <button type="button" onClick="window.location.href='http://localhost:3000/findPeopleWith/${place.place_name}/${key}/${place.road_address_name}/${detailAddr}/${grade}/${phone}/${cat}'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">같이 먹을사람 찾기</button>
+                                            <button type="button" onClick="window.location.href='http://localhost:3000/SearchParty/${place.place_name}/${key}/${place.road_address_name}/${detailAddr}/${grade}/${phone}/${cat}'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">같이 먹을사람 찾기</button>
                                        </div>
                                        <div style="float:right;margin:15px 10px 0 0;font-size:12px;font-color:red;text-align:center">위생등급 <br /> <h2>${grade}</h2> </div>
                                    </div>

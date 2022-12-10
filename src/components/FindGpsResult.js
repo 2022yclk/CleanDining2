@@ -151,13 +151,14 @@ const FindGpsResult = ({data1, data2}) => {
                                <div class="info" style="width: 286px;height: 140px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
                                    <div class="title" style="padding: 5px 0 0 10px;height: 50px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
                                    <div>${place.place_name}</div>
-                                    <div style="float:right;margin:5px 10px 0 0;font-size:12px;font-color:red;">위생등급:  ${openapi.HG_ASGN_LV}</div>
+                                
+                                   <div style="float:right;margin:15px 10px 0 0;font-size:12px;font-color:red;text-align:center">위생등급: <h2> ${openapi.HG_ASGN_LV}</h2></div>
                                    </div>
                                    <div class="body" style="position: relative;overflow: hidden;">
-                                       <div class="desc" style="position: relative;margin: 13px 0 0 90px;height: 75px;">
-                                            <div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소)${place.address_name}</div>
+                                   <div class="desc" style="position: relative;margin: 10px 10px 10px 10px;height: 100px;">
+                                   <div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소)${place.address_name}</div>
                                             <div class="jibun" style="font-size: 11px;color: #888;margin-top: -2px;">지번)${place.road_address_name}</div>
-                                            <button type="button" onClick="window.location.href = 'http://localhost:3000/findPeopleWith/${place.place_name}/${openapi.WRKR_REG_NO}/${place.address_name}/${openapi.ADDR}/${openapi.HG_ASGN_LV}/${place.phone}/${place.category_name}'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">같이 먹을사람 찾기</button>
+                                            <button type="button" onClick="window.location.href = 'http://localhost:3000/SearchParty/${place.place_name}/${openapi.WRKR_REG_NO}/${place.address_name}/${openapi.ADDR}/${openapi.HG_ASGN_LV}/${place.phone}/${place.category_name}'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">같이 먹을사람 찾기</button>
                                        </div>
                                    </div>
                                </div>

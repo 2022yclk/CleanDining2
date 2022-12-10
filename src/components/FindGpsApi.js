@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import FindGpsResult from './FindGpsResult.js';
 import Loading from './Loading';
 import '../css/FindGps.css';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 const FindGpsApi = ({addr, print}) => {
 
@@ -48,13 +50,11 @@ const FindGpsApi = ({addr, print}) => {
 
     return (
         <div>
-            <div class="top">
-                <div class="top_info">현재위치: {print}</div>
-                <ul />
-                <ul />
-                <ul />
-                <button class="top_btn" onClick={handleClick}>음식점 검색하기</button>
-            </div>
+            <Grid container >
+                <Grid item sx={{ mt:1 }} xs><h2>현재위치: {print}</h2></Grid>
+                <Grid item sx={{ mt:1 }}><Button variant="contained" color="success"  sx={{ mt:3 }} onClick = {handleClick}>검색 ㄱㄱ</Button></Grid>
+            </Grid>
+
             <br />
             {loading ? <Loading /> : <FindGpsResult data1={dataMap} data2={dataMap2}/>}
         </div>

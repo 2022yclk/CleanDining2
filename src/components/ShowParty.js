@@ -24,7 +24,6 @@ function ShowParty(){
         const requestURL = "http://52.79.70.2:3000/participateParty";
         const participateInfo = {
             'postid': postid,
-            'email': sessionStorage.getItem("email")
         }
         
         if(num==gather){
@@ -59,12 +58,11 @@ function ShowParty(){
                         </div>
                         <div className="partyTitle">
                             <label>Date / Time </label>
-                            {item.date.slice(0,10)}&nbsp;&nbsp;
-                            {item.hour}시{item.min}분
+                            {item.date}{item.time}
                         </div>
                         <div className="partyTitle">
                             <label>Due Date </label>
-                            {item.dueDate.slice(0,10)}
+                            {item.dueDate}
                         </div>
                         <div className="partyTitle">
                             <label>내용</label>
