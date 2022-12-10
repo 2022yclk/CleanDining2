@@ -26,28 +26,35 @@ import axios from 'axios';
 //   createData(4, 7,'내가찜한닭','2022-12-04', 0),
 // ];
 
+
+
+
+
+// function setData(Data) {
+//   report_id, review_id, restaurant, date, processed, r_date, r_writer_id, r_contents, r_report_cnt
+// };
+
+
+
+
 function Row(props) {
-  //const { row } = props;
   const [open, setOpen] = React.useState(false);
   
   // database row 만들기 위한 데이터 구축
   const [data, setData] = React.useState([]); 
+
   useEffect(()=>{
     getReportList(); // 컴포넌트가 렌더링될 때마다 데이터 불러오기
   }, []);
 
   function getReportList(){ // database 신고에 data 불러오기
     axios({
-      method: 'get',  
+      method: 'get',
       url: 'http://52.79.70.2:3000/getReportedData',
       params: {'key': data}
     }).then(res=>setData(res.data));
+    console.log(data);
   }
-
-  // function setData(Data) {
-  //   report_id, review_id, restaurant, date, processed, r_date, r_writer_id, r_contents, r_report_cnt
-  // };
-
   // 신고 수락 이벤트
   function acceptReportRequest(reviewID, event) {
     // 해당 리뷰를 review table에서 삭제한다.
@@ -83,29 +90,20 @@ function Row(props) {
     window.location.reload();
   }
 
+
   return (
-    //console.log("FULL Data is::", data) && data&& console.log("ㅎㅎ") && data.map((item)=>(
     data.map((item)=>(
       <React.Fragment>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell>
-          <TableCell component="th" scope="row">{item.date.slice(0,10)}</TableCell>
+          <TableCell sx={{ fontSize:"14px" }} component="th" scope="row">{item.date.slice(0,10)}</TableCell>  
           <TableCell align="left">{item.writer_id}</TableCell>
           <TableCell align="left">{item.title}</TableCell>
           <TableCell align="right">{item.resName}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: "#ccc" }} colSpan={6}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{margin: 1, padding:0.1, backgroundColor: "#FFFFFF"}}>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: "#F5FEEE" }} colSpan={6}>
+            <Collapse in={true} timeout="auto" unmountOnExit>
+              <Box sx={{margin: 1, padding:0.1, backgroundColor: "#F5FEEE"}}>
                 <Box sx={{ marginTop: 1, marginLeft:2, marginRight:2, display:'flex', justifyContent: "space-between" }}>
                   <Typography variant="h6" gutterBottom component="div" fontFamily={"Nanum"}>
                     Reported Review Detail
@@ -139,38 +137,35 @@ function Row(props) {
         </TableRow>
       </React.Fragment>
     ))
-  );
+  )
 }
 
 Row.propTypes = {
   row: PropTypes.shape({
-    // report data
-    report_id: PropTypes.number.isRequired, 
-    review_id: PropTypes.number.isRequired, 
-    restaurant: PropTypes.string.isRequired, 
+    license_id: PropTypes.string.isRequired, 
+    title: PropTypes.string.isRequired, 
     date: PropTypes.string.isRequired, 
-    processed: PropTypes.bool.isRequired, 
-    // review data
-    r_date: PropTypes.string.isRequired, 
-    r_writer_id: PropTypes.string.isRequired, 
-    r_contents: PropTypes.string.isRequired, 
-    r_report_cnt: PropTypes.number.isRequired, 
+    grade: PropTypes.string.isRequired, 
+    content: PropTypes.string.isRequired, 
+    alertCnt: PropTypes.number.isRequired, 
+    recomCnt: PropTypes.number.isRequired, 
+    review_id: PropTypes.number.isRequired, 
+    writer_id: PropTypes.number.isRequired, 
+    resName: PropTypes.string.isRequired, 
   }).isRequired,
 };
 
+
 export default function CollapsibleTable() {
-
-
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
+      <Table aria-label="collapsible table" sx={{backgroundColor: "#FFFFFF"}}>
         <TableHead>
           <TableRow>
-            <TableCell />
-            <TableCell>Date&nbsp;</TableCell>
-            <TableCell align="left">Writer&nbsp;</TableCell>
-            <TableCell align="left">Review Title&nbsp;(g)</TableCell>
-            <TableCell align="right">Restaurant&nbsp;(YYYY-MM-DD)</TableCell>
+            <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}}><b>날짜</b>&nbsp;(YYYY-MM-DD)</TableCell>
+            <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}} align="left"><b>유저아이디</b>&nbsp;</TableCell>
+            <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}} align="left"><b>제목</b>&nbsp;</TableCell>
+            <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}} align="right"><b>식당</b>&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
