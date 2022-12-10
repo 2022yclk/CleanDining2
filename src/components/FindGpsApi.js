@@ -52,7 +52,7 @@ const FindGpsApi = ({addr, print}) => {
         <div>
             <Grid container >
                 <Grid item sx={{ mt:1 }} xs><h2>현재위치: {print}</h2></Grid>
-                <Grid item sx={{ mt:1 }}><Button variant="contained" color="success"  sx={{ mt:3 }} onClick = {handleClick}>검색 ㄱㄱ</Button></Grid>
+                <Grid item sx={{ mt:1 }}><Button variant="contained" color="success"  sx={{ mt:3 }} onClick = {handleClick}>검색하기</Button></Grid>
             </Grid>
 
             <br />

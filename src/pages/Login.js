@@ -173,7 +173,7 @@ function Login() {
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                 <Link
                   onClick={toAdminLogin}>
-                  관리자 로그인(아무나 못들어와요)
+                  관리자 로그인
                   </Link>
                 </Paper>
               </Grid>

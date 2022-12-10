@@ -221,7 +221,7 @@ function Info() {
                 </Paper>
                 <Grid container>
                 <Grid item sx={{ mt:1 }} xs>
-                <Button variant="contained" color="error" onClick={(event) => handleSanitary(event)}>더러운 음식점이에요! 신고합니다!</Button>
+                <Button variant="contained" color="error" onClick={(event) => handleSanitary(event)}>신고합니다!</Button>
                 </Grid>
                 <Grid item sx={{ mt:1 }}>
                 <Button variant="contained" color="success" onClick={(event) => handleReview(event)}>리뷰 쓰기</Button>

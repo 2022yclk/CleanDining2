@@ -201,7 +201,7 @@ function Mypage() {
                 >
                     <br />
                     <center><img src="./accountimg.jpg" width="240" height="200" />
-                    <h3>먹깨비 {email}님, 반갑습니다.</h3></center>
+                    <h3>{email}님, 반갑습니다.</h3></center>
                 </Paper>
               </Grid>
               <Grid item xs={6} md={6} lg={6}>
@@ -225,7 +225,7 @@ function Mypage() {
                         <div>
                         <center><h4>{item.title}</h4>
                         {item.resName}</center><br/><br/>
-                        거사일: {item.date.slice(0,10)}&nbsp;&nbsp;{item.hour}시 &nbsp;/&nbsp;{item.min}분<br/>
+                        만남일: {item.date.slice(0,10)}&nbsp;&nbsp;{item.hour}시 &nbsp;/&nbsp;{item.min}분<br/>
                         파티원: {item.gathered}/{item.gather_num}<br/>
                         내용: {item.content}<br/>
                         마감기한 {item.dueDate.slice(0,10)}

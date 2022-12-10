@@ -18,25 +18,6 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 
-// // 삭제
-// const rows = [
-//   createData(1, 1,'필동함박','2022-12-01', 0),
-//   createData(2, 3,'이삭토스트','2022-12-02', 0),
-//   createData(3, 5,'필동면옥','2022-12-03', 0),
-//   createData(4, 7,'내가찜한닭','2022-12-04', 0),
-// ];
-
-
-
-
-
-// function setData(Data) {
-//   report_id, review_id, restaurant, date, processed, r_date, r_writer_id, r_contents, r_report_cnt
-// };
-
-
-
-
 function Row(props) {
   const [open, setOpen] = React.useState(false);
   
@@ -163,7 +144,7 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}}><b>날짜</b>&nbsp;(YYYY-MM-DD)</TableCell>
-            <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}} align="left"><b>유저아이디</b>&nbsp;</TableCell>
+            <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}} align="left"><b>사용자 아이디</b>&nbsp;</TableCell>
             <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}} align="left"><b>제목</b>&nbsp;</TableCell>
             <TableCell sx={{fontFamily:"Nanum", fontSize:"20px"}} align="right"><b>식당</b>&nbsp;</TableCell>
           </TableRow>

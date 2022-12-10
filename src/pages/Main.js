@@ -155,7 +155,7 @@ function Main() {
                       </Typography>
                       </CardContent>
                       <CardActions>
-                      <Button size="large" fullWidth variant="contained" color="success" onClick={toMap}>찾으러 가보자구</Button>
+                      <Button size="large" fullWidth variant="contained" color="success" onClick={toMap}>주변 음식점 찾기</Button>
                       </CardActions>
                   </Card>
                 </Paper>
@@ -180,11 +180,11 @@ function Main() {
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                          <center>나는 검색할꺼야</center>
+                          <center>검색하여 음식점 찾기</center>
                     </Typography>
                     </CardContent>
                     <CardActions>
-                    <Button size="large" fullWidth variant="contained" color="success" onClick={toStringsearch}>검색하러 가보자구</Button>
+                    <Button size="large" fullWidth variant="contained" color="success" onClick={toStringsearch}>검색하러 가기</Button>
                     </CardActions>
                   </Card>
                 </Paper>

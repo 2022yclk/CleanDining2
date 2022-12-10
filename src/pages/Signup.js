@@ -157,7 +157,7 @@ export default function Signup() {
               sx={{ mt: 3, mb: 2 }}
               //onClick= {returnClick}
             >
-              회원되버리기
+              회원가입하기
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
