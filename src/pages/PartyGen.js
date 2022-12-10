@@ -121,6 +121,7 @@ function PartyGen() {
       const content1 = content;
       const dueDate1 = dueDate;
       const license = key; // license_id
+      const resName = id;
       const userEmail = sessionStorage.getItem("email");
 
       const requestURL = "http://52.79.70.2:3000/addParty";
@@ -134,6 +135,7 @@ function PartyGen() {
           'gather_num': number1,
           'content': content1,
           'duedate': dueDate1,
+          'resName': resName,
           'userEmail' : userEmail
       }
 

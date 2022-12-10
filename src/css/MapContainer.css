@@ -1,6 +1,6 @@
 .body{display:flex;}
 .k-Map{width: 100%;height:85vh; margin: 10px 10px 10px 10px; border: 5pt outset #06a109;}
-.result{float:right;width:20%;height:85vh;display:grid;justify-content:center;margin: 10px 10px 10px 10px;padding:10px;overflow:auto;border: 5pt outset #06a109;}
+.result{float:right;width:20%;height:85vh;display:grid;justify-content:center;margin: 10px 10px 10px 10px;padding:10px;overflow:auto;}
 .item{display:flex;width:250px;height:130px;border-radius:5px;margin:0 0 10px 0;background-color:rgb(255,255,242);}
 .first{line-height:130px;width:25%;display:flex;justify-content:center;background-color: rgb(242, 233, 222);}
 .firstb{width:150px;text-align:left;font-size:17px;font-weight: bold;}

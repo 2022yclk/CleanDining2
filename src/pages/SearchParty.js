@@ -211,7 +211,7 @@ function SearchParty() {
                   <center>{data.map((item)=>(
                         <div className="partylist">
                             <div className="pi-top">
-                                <div>{item.writer_id}admin34(Test Value)</div>
+                                <div>{item.email}</div>
                                 <button onClick={(event)=>handleClick(item.post_id, event)}>파티 확인</button>
                             </div>
                             <div className="pi-mid">

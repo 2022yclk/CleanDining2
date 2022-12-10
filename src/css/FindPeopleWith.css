@@ -13,9 +13,9 @@
 .gradegrade{color:red;}
 .center{display:flex;}
 .pi-top{height:30px;display:flex;background: #b4d4c9;border-radius:10px 10px 0 0;}
-.pi-top button{position:relative;left:135px;top:5px;height:20px;border:none;border-radius:5px;background: #D1F6DF;}
+.pi-top button{position:relative;left:130px;top:5px;height:20px;border:none;border-radius:5px;background: #D1F6DF;}
 .pi-top button:hover{background: #D1E4F6;}
-.pi-top div{margin:5px 0 0 20px; font-size:13px;}
+.pi-top div{margin:5px 0 0 2px; font-size:13px;width:150px;}
 .pi-mid{height:70px;text-align: center;line-height:70px;background: #d3ebea;font-weight:bold;font-size:18px;}
 .pi-btm{height:30px;display:flex}
 .pi-btm-date{margin: 7px 0 0  30px; font-size:13px;}
