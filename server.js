@@ -455,6 +455,7 @@ app.get("/getMyParty", (req,res)=>{
 	});
 	connection.connect();
 	const email = req.body.email;
+	console.log(email);
 	//console.log(value);
 	connection.query("SELECT * FROM users u, findPeople f WHERE u.email = ? AND u.id = f.writer_id;", [email], function(err,data){
 		if(err) throw err;
