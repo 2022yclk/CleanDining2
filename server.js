@@ -34,6 +34,7 @@ app.post("/addParty", (req,res)=> {
     const number = req.body.gather_num;
 	const content = req.body.content;
 	const due = req.body.duedate;
+	const resName = req.body.resName;
 	const email = req.body.userEmail;
     
 	//ADDED By Koh
@@ -43,8 +44,8 @@ app.post("/addParty", (req,res)=> {
 			const userid = rows[0].id;
 	//console.log(partyTime);
     //console.log(partydate, number, license);
-			connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, hour, min, briefInfo, gather_num, content, dueDate) values (?,?,?,?,?,?,?,?,?,?)", 
-			[userid, license, title, partydate, partyHour, partyMin, brief, number, content, due], function(err,rows){
+			connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, hour, min, briefInfo, gather_num, content, dueDate, resName) values (?,?,?,?,?,?,?,?,?,?,?)", 
+			[userid, license, title, partydate, partyHour, partyMin, brief, number, content, due, resName], function(err,rows){
         if(err) throw err;
         else{
             console.log("insert");
@@ -77,15 +78,16 @@ app.post("/addReview", (req,res)=> {
     const grade = req.body.grade;
 	const content = req.body.content;
 	const email = req.body.userEmail;
-    
+	const resName = req.body.resName;
+
 	//Added By Koh
 	connection.query("SELECT id FROM users WHERE email = ?", [email], function(err, rows){
 		if(err) throw err;
 		else if(rows.length){
 			const userid = rows[0].id;
     //console.log(partydate, number, license);
-			connection.query("INSERT INTO review(writer_id, license_id, title, date, grade, content) values (?,?,?,?,?,?)", 
-			[userid, license, title, visitdate, grade, content], function(err,rows){
+			connection.query("INSERT INTO review(writer_id, license_id, title, date, grade, content, resName) values (?,?,?,?,?,?,?)", 
+			[userid, license, title, visitdate, grade, content, resName], function(err,rows){
         if(err) throw err;
         else{
             console.log("insert");
