@@ -42,6 +42,7 @@ app.post("/addParty", (req,res)=> {
       if(err) throw err;
       else if(rows.length){
          const userid = rows[0].id;
+		 console.log(partydate);
          connection.query("INSERT INTO findPeople(writer_id, license_id, title, date, hour, min, briefInfo, gather_num, content, dueDate, resName) values (?,?,?,?,?,?,?,?,?,?,?)", 
          [userid, license, title, partydate, partyHour, partyMin, brief, number, content, due, resName], function(err,rows){
               if(err) throw err;
@@ -50,10 +51,10 @@ app.post("/addParty", (req,res)=> {
               }
           });
          connection.query("SELECT post_id FROM findPeople WHERE writer_id = ? AND date = ? AND hour = ? AND min = ? AND license_id = ?", [userid, partydate, partyHour, partyMin, license],function(err, rows){
-            if(err) throw err;
+			if(err) throw err;
             else {
                const postid = rows[0].post_id;
-               connection.query("INSERT INTO user_party(email, post_id) value (?,?)", [userid,postid], function(err, rows){
+               connection.query("INSERT INTO user_party(email, post_id) values (?,?)", [email, postid], function(err, rows){
                   if(err) throw err;
                   else {
                      console.log("insert at user_party");
@@ -61,7 +62,7 @@ app.post("/addParty", (req,res)=> {
                })
             }
          })
-         connection.end();
+         //connection.end();
       }
       else {
          res.send("ERROR: NO SUCH EMAIL IN DB");
@@ -153,26 +154,35 @@ app.post("/participateParty", (req, res) => {
 	   host: "localhost",
 	   user: "serverDBManager",
 	   password: "0000",
-	   databse: "dining",
+	   database: "dining",
 	   port: 3306
 	});
 	connection.connect();
 	const postid = req.body.postid;
 	const email = req.body.email;
-	connection.query("UPDATE dining.findPeople SET gathered = gathered + 1 WHERE post_id = ?", [postid], function(err,rows){
-	   if(err) throw err;
-	   else{
-		  console.log("participate success");
-		  connection.query("INSERT INTO user_party(email, post_id) value (?,?)",[email, postid],function(err, rows){
+	connection.query("SELECT * FROM user_party WHERE email = ? AND post_id = ?", [email, postid], function(err, rows){
+	   if (err) throw err
+	   else if(rows.length){
+		  res.send("Already");
+	   }
+	   else {
+		  connection.query("UPDATE dining.findPeople SET gathered = gathered + 1 WHERE post_id = ?", [postid], function(err,rows){
+			 if(err) throw err;
+			 else{
+				console.log("participate success");               
+			 }
+		   });
+ 
+		  connection.query("INSERT INTO user_party(email, post_id) values (?,?)",[email, postid],function(err, rows){
 			 if(err) throw err;
 			 else {
 				console.log("Insert at user_party");
+				res.send("Participated");
 			 }
-		  })
+		   })
 	   }
-	});
-	connection.end();
- })
+	  })
+  })
  
 
 app.get("/getPartyData", (req,res)=>{
