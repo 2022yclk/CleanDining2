@@ -105,7 +105,7 @@ function Info() {
 
   const handleClick = (review_id, event) => {
       event.preventDefault();
-      window.location.href = `http://localhost:3000/showReview/${key}/${review_id}`;
+      window.location.href = `http://localhost:3000/ReviewDetail/${key}/${review_id}`;
   }
 
   const handleAlert = (review_id, event) => {
@@ -242,7 +242,7 @@ function Info() {
                             {data.map((item)=>(
                                 <div className="partylist">
                                     <div className="wd-top">
-                                        <div>{item.writer_id}admin34(Test Value)</div>
+                                        <div>{item.email}</div>
                                         <button className="wd-btn" onClick={(event) => handleRecommend(item.review_id, event)}>추천</button>
                                         <button className="wd-btn" onClick={(event) => handleAlert(item.review_id, event)}>신고</button>
                                     </div>

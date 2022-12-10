@@ -236,7 +236,7 @@ app.get("/getReviewData", (req,res)=>{
 	connection.connect();
 	const value = req.query.key;
 	console.log(value);
-	connection.query("SELECT * FROM review WHERE license_id = ?", [value], function(err,data){
+	connection.query("SELECT * FROM users u, review f WHERE u.id = f.writer_id AND license_id = ?", [value], function(err,data){
 		if(err) throw err;
 		else{
 			console.log("get");
